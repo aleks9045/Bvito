@@ -1,0 +1,32 @@
+spring:
+  main:
+    lazy-initialization: true
+  application:
+    name: Bvito
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bvito_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+logging:
+  level:
+    org.springframework: INFO
+
+server:
+  port: 8000
+  error:
+    include-stacktrace: always
+  tomcat:
+    connection-timeout: 5s
+    keep-alive-timeout: 30s
+    max-keep-alive-requests: 100
