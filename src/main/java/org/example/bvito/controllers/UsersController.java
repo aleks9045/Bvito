@@ -1,7 +1,9 @@
 package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.example.bvito.models.Users;
+import org.example.bvito.schemas.UserAdsSchema;
 import org.example.bvito.schemas.UsersSchema;
 import org.example.bvito.service.UsersService;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(name = "/api/v1/users")
+@RequestMapping(path = "/api/v1/users")
 @Tag(name = "Users")
 public class UsersController {
     private final UsersService usersService;
@@ -28,8 +30,14 @@ public class UsersController {
         return ResponseEntity.status(200).body(allUsers);
     }
 
-    @PostMapping
-    public ResponseEntity<Users> addUser(@RequestBody UsersSchema usersSchema) {
+    @GetMapping("/{u_id}/ads")
+    public ResponseEntity<UserAdsSchema> getUserAds(@PathVariable("u_id") int u_id) {
+        UserAdsSchema userAdsSchema = usersService.getUserAds(u_id);
+    return ResponseEntity.status(200).body(userAdsSchema);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Users> addUser(@Valid @RequestBody UsersSchema usersSchema) {
         Users addedUser = usersService.addUser(usersSchema);
         return ResponseEntity.created(
                         URI.create("/users/" + addedUser.getU_id()))
@@ -47,7 +55,7 @@ public class UsersController {
     }
 
     @PutMapping("/{u_id}")
-    public ResponseEntity<Users> putUser(@PathVariable("u_id") int u_id, @RequestBody UsersSchema usersSchema){
+    public ResponseEntity<Users> putUser(@PathVariable("u_id") int u_id, @Valid @RequestBody UsersSchema usersSchema){
         Users updatedUser = usersService.updateUser(u_id, usersSchema);
 
         HttpHeaders headers = new HttpHeaders();

@@ -3,6 +3,8 @@ package org.example.bvito.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -14,16 +16,16 @@ public class Ads {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer a_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "u_id", nullable = false)
-    private Users users;
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Users user;
 
     @Column(name = "brand", nullable = false, length = 32)
     private String brand;
 
     @Column(name = "model", nullable = false, length = 64)
     private String model;
-
 
     @Column(name = "year", nullable = false, columnDefinition = "INTEGER CHECK (0 < year and year < 3000)")
     @Min(0)
@@ -42,13 +44,13 @@ public class Ads {
     private String description;
 
     @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
 
     public Ads() {}
 
-    public Ads(Integer a_id, Users users, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
+    public Ads(Integer a_id, Users user, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
         this.a_id = a_id;
-        this.users = users;
+        this.user = user;
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -62,19 +64,19 @@ public class Ads {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ads ads)) return false;
-        return Objects.equals(getA_id(), ads.getA_id()) && Objects.equals(getUsers(), ads.getUsers()) && Objects.equals(getBrand(), ads.getBrand()) && Objects.equals(getModel(), ads.getModel()) && Objects.equals(getYear(), ads.getYear()) && Objects.equals(getMileage(), ads.getMileage()) && Objects.equals(getPrice(), ads.getPrice()) && Objects.equals(getDescription(), ads.getDescription()) && Objects.equals(getCreatedAt(), ads.getCreatedAt());
+        return Objects.equals(getA_id(), ads.getA_id()) && Objects.equals(getUser(), ads.getUser()) && Objects.equals(getBrand(), ads.getBrand()) && Objects.equals(getModel(), ads.getModel()) && Objects.equals(getYear(), ads.getYear()) && Objects.equals(getMileage(), ads.getMileage()) && Objects.equals(getPrice(), ads.getPrice()) && Objects.equals(getDescription(), ads.getDescription()) && Objects.equals(getCreatedAt(), ads.getCreatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getA_id(), getUsers(), getBrand(), getModel(), getYear(), getMileage(), getPrice(), getDescription(), getCreatedAt());
+        return Objects.hash(getA_id(), getUser(), getBrand(), getModel(), getYear(), getMileage(), getPrice(), getDescription(), getCreatedAt());
     }
 
     @Override
     public String toString() {
         return "Ads{" +
                 "a_id=" + a_id +
-                ", users=" + users +
+                ", users=" + user +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
@@ -93,8 +95,8 @@ public class Ads {
         this.a_id = a_id;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(Users users) {
+        this.user = users;
     }
 
     public void setBrand(String brand) {
@@ -129,8 +131,8 @@ public class Ads {
         return a_id;
     }
 
-    public Users getUsers() {
-        return users;
+    public Users getUser() {
+        return user;
     }
 
     public String getBrand() {

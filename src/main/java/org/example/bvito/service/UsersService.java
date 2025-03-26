@@ -1,6 +1,7 @@
 package org.example.bvito.service;
 
 import org.example.bvito.models.Users;
+import org.example.bvito.schemas.UserAdsSchema;
 import org.example.bvito.schemas.UsersSchema;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface UsersService {
     List<Users> getAllUsers();
 
     Optional<Users> getUserById(int u_id);
+
+    UserAdsSchema getUserAds(int u_id);
 
     Users addUser(UsersSchema usersSchema);
 

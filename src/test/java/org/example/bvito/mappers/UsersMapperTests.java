@@ -17,11 +17,20 @@ public class UsersMapperTests {
     @Test
     void toEntityTest() {
         Users users = Users.newInstance();
-
         UsersSchema usersSchema = UsersSchema.newInstance();
 
         Users usersFromSchema = usersMapper.toEntity(usersSchema);
         usersFromSchema.setU_id(1);
+
         assertEquals(users, usersFromSchema);
+    }
+
+    @Test
+    void toSchemaTest() {
+        Users users = Users.newInstance();
+        UsersSchema usersSchema = UsersSchema.newInstance();
+
+        UsersSchema usersSchemaFromModel = usersMapper.toSchema(users);
+        assertEquals(usersSchema, usersSchemaFromModel);
     }
 }
