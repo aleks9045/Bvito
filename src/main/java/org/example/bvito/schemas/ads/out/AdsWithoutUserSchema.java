@@ -1,4 +1,4 @@
-package org.example.bvito.schemas;
+package org.example.bvito.schemas.ads.out;
 
 import java.math.BigDecimal;
 

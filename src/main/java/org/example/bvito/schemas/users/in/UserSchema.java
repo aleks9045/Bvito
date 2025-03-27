@@ -1,35 +1,37 @@
-package org.example.bvito.schemas;
+package org.example.bvito.schemas.users.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
+import org.example.bvito.schemas.users.UsersValidationGroups;
 
 import java.util.Objects;
 
 
-public class UsersSchema {
+public class UserSchema {
 
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")
-    @NotNull
+    @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 64)
     private String user_name;
 
     @Schema(description = "password", maxLength = 64, example = "password")
-    @NotNull
+    @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 64)
     private String password;
 
     @Schema(description = "name", maxLength = 64, example = "Nazar'ko Nikolai Vadimovich")
-    @NotNull
+    @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 64)
     private String name;
 
     @Schema(description = "phone number", maxLength = 16, example = "8(928)384-88-23")
-    @NotNull
+    @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 16)
     private String phone_number;
 
-    public UsersSchema(String user_name, String password, String name, String phone_number) {
+    public UserSchema(String user_name, String password, String name, String phone_number) {
         this.user_name = user_name;
         this.password = password;
         this.name = name;
@@ -39,7 +41,7 @@ public class UsersSchema {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UsersSchema that)) return false;
+        if (!(o instanceof UserSchema that)) return false;
         return Objects.equals(getUser_name(), that.getUser_name()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getName(), that.getName()) && Objects.equals(getPhone_number(), that.getPhone_number());
     }
 
@@ -90,7 +92,7 @@ public class UsersSchema {
         return phone_number;
     }
 
-    public static UsersSchema newInstance() {
-        return new UsersSchema("Nikola2007", "password", "Nazar'ko Nikolai Vadimovich", "8(928)384-88-23");
+    public static UserSchema newInstance() {
+        return new UserSchema("Nikola2007", "password", "Nazar'ko Nikolai Vadimovich", "8(928)384-88-23");
     }
 }

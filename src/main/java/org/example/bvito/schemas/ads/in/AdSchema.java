@@ -1,54 +1,54 @@
-package org.example.bvito.schemas;
+package org.example.bvito.schemas.ads.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-import org.example.bvito.models.Users;
+import jakarta.validation.constraints.*;
+import org.example.bvito.schemas.ads.AdsValidationGroups;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
 
-public class AdsSchema {
+public class AdSchema {
 
     @Schema(description = "user id", example = "1")
-    @NotNull
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Positive
     private Integer u_id;
 
     @Schema(description = "brand", maxLength = 32, example = "BMV")
-    @NotNull
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Size(max = 32)
     private String brand;
 
     @Schema(description = "model", maxLength = 64, example = "A5")
-    @NotNull
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Size(max = 64)
     private String model;
 
     @Schema(description = "year", example = "2018", minimum = "0", maximum = "3000")
-    @NotNull
-    @Size(max = 3000)
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
+    @Min(0)
+    @Max(3000)
     private Short year;
 
     @Schema(description = "mileage", example = "440000", minimum = "0", maximum = "10_000_000")
-    @NotNull
-    @Size(max = 10_000_000)
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
+    @Min(0)
+    @Max(10_000_000)
     private Integer mileage;
 
     @Schema(description = "price", example = "1299990.90")
-    @NotNull
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
     private BigDecimal price;
 
     @Schema(description = "description", maxLength = 256, example = "long description")
-    @NotNull
+    @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Size(max = 256)
     private String description;
 
 
-    public AdsSchema(Integer u_id, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
+    public AdSchema(Integer u_id, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
         this.u_id = u_id;
         this.brand = brand;
         this.model = model;
@@ -61,8 +61,8 @@ public class AdsSchema {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AdsSchema adsSchema)) return false;
-        return Objects.equals(u_id, adsSchema.u_id) && Objects.equals(brand, adsSchema.brand) && Objects.equals(model, adsSchema.model) && Objects.equals(year, adsSchema.year) && Objects.equals(mileage, adsSchema.mileage) && Objects.equals(price, adsSchema.price) && Objects.equals(description, adsSchema.description);
+        if (!(o instanceof AdSchema adSchema)) return false;
+        return Objects.equals(u_id, adSchema.u_id) && Objects.equals(brand, adSchema.brand) && Objects.equals(model, adSchema.model) && Objects.equals(year, adSchema.year) && Objects.equals(mileage, adSchema.mileage) && Objects.equals(price, adSchema.price) && Objects.equals(description, adSchema.description);
     }
 
     @Override
@@ -83,8 +83,8 @@ public class AdsSchema {
                 '}';
     }
 
-    public static AdsSchema newInstance() {
-        return new AdsSchema(1, "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
+    public static AdSchema newInstance() {
+        return new AdSchema(1, "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
     }
 
     public Integer getU_id() {
