@@ -3,10 +3,11 @@ package org.example.bvito.service.impl;
 import org.example.bvito.mappers.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.repository.AdsRepository;
-import org.example.bvito.schemas.AdsSchema;
-import org.example.bvito.schemas.UsersSchema;
+import org.example.bvito.schemas.ads.in.AdSchema;
+import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
 import org.example.bvito.service.AdsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,22 +26,26 @@ public class AdsServiceImpl implements AdsService {
         return adsRepository.findAll();
     }
 
-    public Optional<Ads> getAdsById(int a_id) {
+    public Optional<Ads> getAdById(int a_id) {
         return adsRepository.findById(a_id);
     }
 
-    public Ads addAds(AdsSchema adsSchema) {
-        Ads ads = adsMapper.toEntity(adsSchema);
+    public Ads addAd(AdSchema adSchema) {
+        Ads ads = adsMapper.toEntity(adSchema);
+
         return adsRepository.save(ads);
     }
 
-    public Ads updateAds(int a_id, AdsSchema adsSchema) {
-        Ads ads = adsMapper.toEntity(adsSchema);
-        ads.setA_id(a_id);
-        return adsRepository.save(ads);
+    @Transactional
+    public Ads updateAd(int a_id, AdSchema adSchema) {
+        Ads existingAd = adsRepository.findById(a_id).orElseThrow();
+
+        adsMapper.updateEntity(adSchema, existingAd);
+        return existingAd;
     }
 
-    public void deleteAdsById(int a_id) {
+    @Transactional
+    public void deleteAdById(int a_id) {
         adsRepository.deleteById(a_id);
     }
 }

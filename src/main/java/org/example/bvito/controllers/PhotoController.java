@@ -1,2 +1,4 @@
-package org.example.bvito.controllers;public class PhotoController {
+package org.example.bvito.controllers;
+
+public class PhotoController {
 }

@@ -1,13 +1,13 @@
 package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.example.bvito.models.Ads;
-import org.example.bvito.models.Ads;
-import org.example.bvito.schemas.AdsSchema;
+import org.example.bvito.schemas.ads.AdsValidationGroups;
+import org.example.bvito.schemas.ads.in.AdSchema;
 import org.example.bvito.service.impl.AdsServiceImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -31,8 +31,9 @@ public class AdsController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Ads> addAd(@Valid @RequestBody AdsSchema adsSchema) {
-        Ads addedAd = adsService.addAds(adsSchema);
+    public ResponseEntity<Ads> addAd(@Validated(AdsValidationGroups.OnCreate.class)
+                                         @RequestBody AdSchema adSchema) {
+        Ads addedAd = adsService.addAd(adSchema);
         return ResponseEntity.created(
                         URI.create("/ads/" + addedAd.getA_id()))
                 .body(addedAd);
@@ -40,7 +41,7 @@ public class AdsController {
 
     @GetMapping("/{a_id}")
     public ResponseEntity<Optional<Ads>> getAd(@PathVariable("a_id") int a_id) {
-        Optional<Ads> user = adsService.getAdsById(a_id);
+        Optional<Ads> user = adsService.getAdById(a_id);
         if (user.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
@@ -48,9 +49,11 @@ public class AdsController {
         }
     }
 
-    @PutMapping("/{a_id}")
-    public ResponseEntity<Ads> putAd(@PathVariable("a_id") int a_id, @Valid @RequestBody AdsSchema adsSchema) {
-        Ads updatedAd = adsService.updateAds(a_id, adsSchema);
+    @PatchMapping("/{a_id}")
+    public ResponseEntity<Ads> patchAd(@PathVariable("a_id") int a_id,
+                                       @Validated(AdsValidationGroups.OnUpdate.class)
+                                       @RequestBody AdSchema adSchema) {
+        Ads updatedAd = adsService.updateAd(a_id, adSchema);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/ads/" + updatedAd.getA_id());
@@ -60,7 +63,7 @@ public class AdsController {
 
     @DeleteMapping("/{a_id}")
     public ResponseEntity deleteAd(@PathVariable("a_id") int a_id) {
-        adsService.deleteAdsById(a_id);
+        adsService.deleteAdById(a_id);
         return ResponseEntity.ok().build();
     }
 }

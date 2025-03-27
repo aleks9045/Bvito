@@ -1,9 +1,7 @@
 package org.example.bvito.service;
 
 import org.example.bvito.models.Ads;
-import org.example.bvito.models.Users;
-import org.example.bvito.schemas.AdsSchema;
-import org.example.bvito.schemas.UsersSchema;
+import org.example.bvito.schemas.ads.in.AdSchema;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +9,11 @@ import java.util.Optional;
 public interface AdsService {
     List<Ads> getAllAds();
 
-    Optional<Ads> getAdsById(int a_id);
+    Optional<Ads> getAdById(int a_id);
 
-    Ads addAds(AdsSchema adsSchema);
+    Ads addAd(AdSchema adSchema);
 
-    Ads updateAds(int a_id, AdsSchema adsSchema);
+    Ads updateAd(int a_id, AdSchema adSchema);
 
-    void deleteAdsById(int a_id);
+    void deleteAdById(int a_id);
 }

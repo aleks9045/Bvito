@@ -1,8 +1,8 @@
 package org.example.bvito.mappers;
 
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.AdsWithoutUserSchema;
-import org.example.bvito.schemas.UserAdsSchema;
+import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
+import org.example.bvito.schemas.users.out.UserAdsSchema;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserAdsMapper {
 
     @Mapping(target = "user", source = "user")
-    @Mapping(target = "adList", source = "adList")
-    UserAdsSchema toSchema(Users user, List<AdsWithoutUserSchema> adList);
+    @Mapping(target = "ads", source = "ads")
+    UserAdsSchema toSchema(Users user, List<AdsWithoutUserSchema> ads);
 
 }

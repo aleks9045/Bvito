@@ -1,13 +1,14 @@
 package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.UserAdsSchema;
-import org.example.bvito.schemas.UsersSchema;
+import org.example.bvito.schemas.users.out.UserAdsSchema;
+import org.example.bvito.schemas.users.in.UserSchema;
+import org.example.bvito.schemas.users.UsersValidationGroups;
 import org.example.bvito.service.UsersService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -33,12 +34,13 @@ public class UsersController {
     @GetMapping("/{u_id}/ads")
     public ResponseEntity<UserAdsSchema> getUserAds(@PathVariable("u_id") int u_id) {
         UserAdsSchema userAdsSchema = usersService.getUserAds(u_id);
-    return ResponseEntity.status(200).body(userAdsSchema);
+        return ResponseEntity.status(200).body(userAdsSchema);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Users> addUser(@Valid @RequestBody UsersSchema usersSchema) {
-        Users addedUser = usersService.addUser(usersSchema);
+    public ResponseEntity<Users> addUser(@Validated(UsersValidationGroups.OnCreate.class)
+                                         @RequestBody UserSchema userSchema) {
+        Users addedUser = usersService.addUser(userSchema);
         return ResponseEntity.created(
                         URI.create("/users/" + addedUser.getU_id()))
                 .body(addedUser);
@@ -54,9 +56,11 @@ public class UsersController {
         }
     }
 
-    @PutMapping("/{u_id}")
-    public ResponseEntity<Users> putUser(@PathVariable("u_id") int u_id, @Valid @RequestBody UsersSchema usersSchema){
-        Users updatedUser = usersService.updateUser(u_id, usersSchema);
+    @PatchMapping("/{u_id}")
+    public ResponseEntity<Users> putUser(@PathVariable("u_id") int u_id,
+                                         @Validated(UsersValidationGroups.OnUpdate.class)
+                                         @RequestBody UserSchema userSchema) {
+        Users updatedUser = usersService.updateUser(u_id, userSchema);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/users/" + updatedUser.getU_id());

@@ -1,8 +1,11 @@
 package org.example.bvito.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,7 +19,7 @@ public class Ads {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer a_id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "u_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;
@@ -38,6 +41,7 @@ public class Ads {
     private Integer mileage;
 
     @Column(name = "price", nullable = false, precision = 9, scale = 2)
+    @DecimalMin("0.00")
     private BigDecimal price;
 
     @Column(name = "description", nullable = false, length = 256)

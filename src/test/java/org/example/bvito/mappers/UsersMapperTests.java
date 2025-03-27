@@ -2,10 +2,8 @@ package org.example.bvito.mappers;
 
 
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.UsersSchema;
+import org.example.bvito.schemas.users.in.UserSchema;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,9 +15,9 @@ public class UsersMapperTests {
     @Test
     void toEntityTest() {
         Users users = Users.newInstance();
-        UsersSchema usersSchema = UsersSchema.newInstance();
+        UserSchema userSchema = UserSchema.newInstance();
 
-        Users usersFromSchema = usersMapper.toEntity(usersSchema);
+        Users usersFromSchema = usersMapper.toEntity(userSchema);
         usersFromSchema.setU_id(1);
 
         assertEquals(users, usersFromSchema);
@@ -28,9 +26,9 @@ public class UsersMapperTests {
     @Test
     void toSchemaTest() {
         Users users = Users.newInstance();
-        UsersSchema usersSchema = UsersSchema.newInstance();
+        UserSchema userSchema = UserSchema.newInstance();
 
-        UsersSchema usersSchemaFromModel = usersMapper.toSchema(users);
-        assertEquals(usersSchema, usersSchemaFromModel);
+        UserSchema userSchemaFromModel = usersMapper.toSchema(users);
+        assertEquals(userSchema, userSchemaFromModel);
     }
 }

@@ -5,9 +5,9 @@ import org.example.bvito.mappers.UsersMapper;
 import org.example.bvito.models.Users;
 import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.repository.UsersRepository;
-import org.example.bvito.schemas.AdsWithoutUserSchema;
-import org.example.bvito.schemas.UserAdsSchema;
-import org.example.bvito.schemas.UsersSchema;
+import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
+import org.example.bvito.schemas.users.out.UserAdsSchema;
+import org.example.bvito.schemas.users.in.UserSchema;
 import org.example.bvito.service.UsersService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,8 +41,8 @@ public class UsersServiceImpl implements UsersService {
         return userAdsMapper.toSchema(user, adList);
     }
 
-    public Users addUser(UsersSchema usersSchema) {
-        Users user = usersMapper.toEntity(usersSchema);
+    public Users addUser(UserSchema userSchema) {
+        Users user = usersMapper.toEntity(userSchema);
         return usersRepository.save(user);
     }
 
@@ -51,10 +51,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Transactional
-    public Users updateUser(int u_id, UsersSchema usersSchema) {
-        Users user = usersMapper.toEntity(usersSchema);
-        user.setU_id(u_id);
-        return usersRepository.save(user);
+    public Users updateUser(int u_id, UserSchema userSchema) {
+        Users existingUser = usersRepository.findById(u_id).orElseThrow();
+        System.out.println(existingUser);
+        usersMapper.updateEntity(userSchema, existingUser);
+        System.out.println(existingUser);
+
+        return existingUser;
     }
 
     @Transactional
