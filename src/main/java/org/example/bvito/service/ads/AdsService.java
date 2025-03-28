@@ -1,4 +1,4 @@
-package org.example.bvito.service;
+package org.example.bvito.service.ads;
 
 import org.example.bvito.models.Ads;
 import org.example.bvito.schemas.ads.in.AdSchema;
@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface AdsService {
     List<Ads> getAllAds();
 
-    Optional<Ads> getAdById(int a_id);
+    Ads getAdById(int a_id);
 
     Ads addAd(AdSchema adSchema);
 

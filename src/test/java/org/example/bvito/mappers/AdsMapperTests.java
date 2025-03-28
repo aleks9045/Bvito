@@ -1,6 +1,7 @@
 package org.example.bvito.mappers;
 
 
+import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.schemas.ads.in.AdSchema;
 import org.junit.jupiter.api.Test;

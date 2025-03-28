@@ -1,8 +1,8 @@
-package org.example.bvito.mappers;
+package org.example.bvito.mappers.users;
 
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.users.UsersValidationGroups;
 import org.example.bvito.schemas.users.in.UserSchema;
+import org.example.bvito.schemas.users.out.SecureUserSchema;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -13,7 +13,7 @@ public interface UsersMapper {
 
     @Mapping(source = "userName", target = "user_name")
     @Mapping(source = "phoneNumber", target = "phone_number")
-    UserSchema toSchema(Users users);
+    SecureUserSchema toSchema(Users users);
 
     @Mapping(target = "u_id", ignore = true)
     @Mapping(source = "user_name", target = "userName")
@@ -25,4 +25,5 @@ public interface UsersMapper {
     @Mapping(source = "phone_number", target = "phoneNumber")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(UserSchema userSchema, @MappingTarget Users user);
+
 }

@@ -1,15 +1,16 @@
-package org.example.bvito.service.impl;
+package org.example.bvito.service.ads.impl;
 
-import org.example.bvito.mappers.AdsMapper;
+import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.schemas.ads.in.AdSchema;
-import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
-import org.example.bvito.service.AdsService;
+import org.example.bvito.service.ads.AdsService;
+import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -26,8 +27,8 @@ public class AdsServiceImpl implements AdsService {
         return adsRepository.findAll();
     }
 
-    public Optional<Ads> getAdById(int a_id) {
-        return adsRepository.findById(a_id);
+    public Ads getAdById(int a_id) {
+        return adsRepository.findById(a_id).orElseThrow(() -> new NoSuchElementException("Ad not found"));
     }
 
     public Ads addAd(AdSchema adSchema) {

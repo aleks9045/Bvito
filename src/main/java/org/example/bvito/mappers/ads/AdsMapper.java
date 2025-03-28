@@ -1,12 +1,10 @@
-package org.example.bvito.mappers;
+package org.example.bvito.mappers.ads;
 
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Users;
 import org.example.bvito.schemas.ads.in.AdSchema;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AdsMapper {

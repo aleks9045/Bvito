@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.bvito.models.Ads;
 import org.example.bvito.schemas.ads.AdsValidationGroups;
 import org.example.bvito.schemas.ads.in.AdSchema;
-import org.example.bvito.service.impl.AdsServiceImpl;
+import org.example.bvito.service.ads.impl.AdsServiceImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -40,13 +40,11 @@ public class AdsController {
     }
 
     @GetMapping("/{a_id}")
-    public ResponseEntity<Optional<Ads>> getAd(@PathVariable("a_id") int a_id) {
-        Optional<Ads> user = adsService.getAdById(a_id);
-        if (user.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
+    public ResponseEntity<Ads> getAd(@PathVariable("a_id") int a_id) {
+        Ads user = adsService.getAdById(a_id);
+
             return ResponseEntity.ok().body(user);
-        }
+
     }
 
     @PatchMapping("/{a_id}")

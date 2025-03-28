@@ -6,14 +6,14 @@ import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
 import java.util.List;
 
 public class UserAdsSchema {
-    private Users user;
+    private SecureUserSchema user;
     private List<AdsWithoutUserSchema> ads;
 
-    public Users getUser() {
+    public SecureUserSchema getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(SecureUserSchema user) {
         this.user = user;
     }
 
