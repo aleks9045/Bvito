@@ -20,9 +20,6 @@ public class AdsMapperTests {
     @Test
     void toEntityTest() {
 
-        Instant now = Instant.now();
-        ads.setCreatedAt(now);
-
         Ads adsFromSchema = adsMapper.toEntity(adSchema);
         assertNotNull(adsFromSchema);
 
@@ -41,10 +38,20 @@ public class AdsMapperTests {
 
     @Test
     void toSchemaTest() {
-        Instant now = Instant.now();
-        ads.setCreatedAt(now);
-
         AdSchema adSchemaFromModel = adsMapper.toSchema(ads);
         assertEquals(adSchema, adSchemaFromModel);
+    }
+
+    @Test
+    void updateEntityTest() {
+        Ads adsToUpdate = Ads.newInstance();
+        adsToUpdate.setBrand("NOT KIA");
+        adsToUpdate.setModel("NOT K5");
+        adsToUpdate.setYear((short) 1000);
+        adsMapper.updateEntity(adSchema, adsToUpdate);
+
+        assertEquals(adSchema.getBrand(), adsToUpdate.getBrand());
+        assertEquals(adSchema.getModel(), adsToUpdate.getModel());
+        assertEquals(adSchema.getYear(), adsToUpdate.getYear());
     }
 }
