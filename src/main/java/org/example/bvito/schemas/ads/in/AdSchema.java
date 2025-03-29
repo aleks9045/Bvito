@@ -8,7 +8,13 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
-
+/** Default advertisement schema
+ * <p>
+ *  Linked with {@link org.example.bvito.models.Ads Advertisement model}
+ *  <p>
+ *  Has no id field, because database creates it automatically
+ *  @author Aleksey
+ */
 public class AdSchema {
 
     @Schema(description = "user id", example = "1")

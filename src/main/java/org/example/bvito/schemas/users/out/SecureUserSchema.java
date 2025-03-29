@@ -1,15 +1,16 @@
 package org.example.bvito.schemas.users.out;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
-import org.example.bvito.schemas.users.UsersValidationGroups;
 
-import java.util.List;
 import java.util.Objects;
 
+/** Secure user schema
+ * <p>
+ *  Linked with {@link Users User model}
+ *  <p>
+ *  Has no password field
+ *  @author Aleksey
+ */
 public class SecureUserSchema {
     private Integer u_id;
 

@@ -2,13 +2,19 @@ package org.example.bvito.schemas.users.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
+import org.example.bvito.models.Users;
 import org.example.bvito.schemas.users.UsersValidationGroups;
 
 import java.util.Objects;
 
-
+/** Default user schema
+ * <p>
+ *  Linked with {@link Users User model}
+ *  <p>
+ *  Has no id field, because database creates it automatically
+ *  @author Aleksey
+ */
 public class UserSchema {
 
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")

@@ -1,8 +1,18 @@
 package org.example.bvito.schemas.ads.out;
 
+import org.example.bvito.models.Ads;
+
 import java.math.BigDecimal;
 
-public class AdsWithoutUserSchema {
+/** Advertisement schema without user field
+ * <p>
+ *  Linked with {@link Ads Advertisement model}
+ *  <p>
+ *  Has no id field, because database creates it automatically<br>
+ *  Has no user field for specific display
+ *  @author Aleksey
+ */
+public class AdWithoutUserSchema {
 
     private String brand;
     private String model;
@@ -23,7 +33,7 @@ public class AdsWithoutUserSchema {
                 '}';
     }
 
-    public AdsWithoutUserSchema(String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
+    public AdWithoutUserSchema(String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
         this.brand = brand;
         this.model = model;
         this.year = year;

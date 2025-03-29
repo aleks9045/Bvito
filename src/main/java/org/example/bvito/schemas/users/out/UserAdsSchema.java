@@ -1,13 +1,20 @@
 package org.example.bvito.schemas.users.out;
 
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.out.AdsWithoutUserSchema;
+import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 
 import java.util.List;
 
+/** User schema with list of appropriate advertisements
+ * <p>
+ *  Linked with {@link Users User model}<br>
+ *  Linked with {@link AdWithoutUserSchema Advertisement without user field schema}
+ *
+ *  @author Aleksey
+ */
 public class UserAdsSchema {
     private SecureUserSchema user;
-    private List<AdsWithoutUserSchema> ads;
+    private List<AdWithoutUserSchema> ads;
 
     public SecureUserSchema getUser() {
         return user;
@@ -17,11 +24,11 @@ public class UserAdsSchema {
         this.user = user;
     }
 
-    public List<AdsWithoutUserSchema> getAds() {
+    public List<AdWithoutUserSchema> getAds() {
         return ads;
     }
 
-    public void setAds(List<AdsWithoutUserSchema> ads) {
+    public void setAds(List<AdWithoutUserSchema> ads) {
         this.ads = ads;
     }
 }

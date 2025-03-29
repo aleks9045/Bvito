@@ -3,11 +3,18 @@ package org.example.bvito.schemas.users.in;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.example.bvito.models.Users;
 import org.example.bvito.schemas.users.UsersValidationGroups;
 
 import java.util.Objects;
 
-
+/** Authentication user schema
+ * <p>
+ *  Linked with {@link Users User model}
+ *  <p>
+ *  Has only username and password fields
+ *  @author Aleksey
+ */
 public class UserAuthenticateSchema {
 
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")
@@ -21,7 +28,7 @@ public class UserAuthenticateSchema {
     private String password;
 
 
-    public UserAuthenticateSchema(String user_name, String password, String name, String phone_number) {
+    public UserAuthenticateSchema(String user_name, String password) {
         this.user_name = user_name;
         this.password = password;
     }
@@ -63,6 +70,6 @@ public class UserAuthenticateSchema {
     }
 
     public static UserAuthenticateSchema newInstance() {
-        return new UserAuthenticateSchema("Nikola2007", "password", "Nazar'ko Nikolai Vadimovich", "8(928)384-88-23");
+        return new UserAuthenticateSchema("Nikola2007", "password");
     }
 }

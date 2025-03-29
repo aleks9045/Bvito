@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
+/** Represents advertisement model
+ *  @author Aleksey
+ */
 @Entity
 public class Ads {
     @Id

@@ -3,7 +3,10 @@ package org.example.bvito.service.users.utils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
-
+/**
+ *  Deals with user's password hashing
+ *  @author Aleksey
+ */
 public class PasswordManager {
 
     private PasswordManager() {}

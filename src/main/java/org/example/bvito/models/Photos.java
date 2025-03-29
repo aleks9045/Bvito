@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/**
+ *  Represents photo model
+ *  @author Aleksey
+ */
 @Entity
 public class Photos {
     @Id

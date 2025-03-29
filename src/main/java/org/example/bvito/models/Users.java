@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/**
+ *  Represents user model
+ *  @author Aleksey
+ */
 @Entity
 public class Users {
     @Id

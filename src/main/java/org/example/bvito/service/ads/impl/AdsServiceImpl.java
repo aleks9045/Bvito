@@ -13,6 +13,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * Class which contains all business logic for {@link Ads} model
+ * <p>
+ * Implementation of {@link AdsService} interface
+ * <p>
+ * Depends on {@link AdsRepository}, {@link AdsMapper}
+ *
+ * @author Aleksey
+ */
 @Service
 public class AdsServiceImpl implements AdsService {
     private final AdsRepository adsRepository;

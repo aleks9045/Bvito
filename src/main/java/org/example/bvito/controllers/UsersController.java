@@ -12,6 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ *  Rest controller for users operations (CRUD)
+ *  <p>
+ *  Process HTTP requests to work with {@link Users} model
+ *  Every method returns data in JSON format
+ *
+ *  @author Aleksey
+ *
+ * @see UsersService Service layer interface for business logic
+ * @see Users User model
+ */
 @RestController
 @RequestMapping(path = "/api/v1/users")
 @Tag(name = "Users")
@@ -37,10 +48,10 @@ public class UsersController {
     }
 
     @PatchMapping("/{u_id}")
-    public ResponseEntity<Users> putUser(@PathVariable("u_id") int u_id,
+    public ResponseEntity<SecureUserSchema> putUser(@PathVariable("u_id") int u_id,
                                          @Validated(UsersValidationGroups.OnUpdate.class)
                                          @RequestBody UserSchema userSchema) {
-        Users updatedUser = usersService.updateUser(u_id, userSchema);
+        SecureUserSchema updatedUser = usersService.updateUser(u_id, userSchema);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/users/" + updatedUser.getU_id());

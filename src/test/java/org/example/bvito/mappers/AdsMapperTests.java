@@ -11,7 +11,9 @@ import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
+/**
+ *  @author Aleksey
+ */
 public class AdsMapperTests {
     private final AdsMapper adsMapper = AdsMapper.INSTANCE;
     private final Ads ads = Ads.newInstance();

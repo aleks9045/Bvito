@@ -2,9 +2,12 @@ package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.bvito.models.Ads;
+import org.example.bvito.models.Users;
 import org.example.bvito.schemas.ads.AdsValidationGroups;
 import org.example.bvito.schemas.ads.in.AdSchema;
+import org.example.bvito.service.ads.AdsService;
 import org.example.bvito.service.ads.impl.AdsServiceImpl;
+import org.example.bvito.service.users.UsersService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,13 +17,24 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *  Rest controller for ads operations (CRUD)
+ *  <p>
+ *  Process HTTP requests to work with {@link Ads} model
+ *  Every method returns data in JSON format
+ *
+ *  @author Aleksey
+ *
+ * @see AdsService Service layer for interface business logic
+ * @see Ads Ad model
+ */
 @RestController
 @RequestMapping(path = "/api/v1/ads")
 @Tag(name = "Ads")
 public class AdsController {
-    private final AdsServiceImpl adsService;
+    private final AdsService adsService;
 
-    public AdsController(AdsServiceImpl adsService) {
+    public AdsController(AdsService adsService) {
         this.adsService = adsService;
     }
 

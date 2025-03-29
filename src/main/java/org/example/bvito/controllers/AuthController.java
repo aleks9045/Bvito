@@ -9,11 +9,21 @@ import org.example.bvito.schemas.users.out.SecureUserSchema;
 import org.example.bvito.service.users.UsersService;
 import org.example.bvito.service.users.exceptions.InvalidCredentials;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ *  Rest controller for authentication and authorization logic
+ *  <p>
+ *  Process HTTP requests to work with {@link Users} model
+ *  Every method returns data in JSON format
+ *
+ *  @author Aleksey
+ *
+ * @see UsersService Service layer interface for business logic
+ * @see Users User model
+ */
 @RestController
 @RequestMapping(path = "api/v1/auth")
 @Tag(name = "Auth")
@@ -33,7 +43,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Validated(UsersValidationGroups.OnUpdate.class)
-                                                             @RequestBody UserAuthenticateSchema userAuthenticateSchema){
+                                              @RequestBody UserAuthenticateSchema userAuthenticateSchema) {
         try {
             SecureUserSchema secureUserSchema = usersService.getUserByCredentials(userAuthenticateSchema);
 
@@ -41,7 +51,7 @@ public class AuthController {
             headers.add("Location", "/users/" + secureUserSchema.getU_id());
 
             return ResponseEntity.status(200).headers(headers).body(secureUserSchema);
-        } catch (InvalidCredentials e){
+        } catch (InvalidCredentials e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }
 
