@@ -2,11 +2,17 @@ FROM openjdk:17-jdk-slim AS builder
 
 WORKDIR /bvito
 
+COPY mvnw .
+COPY pom.xml .
+COPY .mvn/ .mvn/
+
+RUN chmod +x mvnw && \
+    ./mvnw dependency:go-offline -B
+
 COPY . .
 
-RUN chmod +x /bvito/mvnw
+RUN ./mvnw package -DskipTests
 
-RUN ./mvnw package
 
 FROM openjdk:17-jdk-slim
 
@@ -14,4 +20,5 @@ COPY --from=builder /bvito/target/Bvito-3.4.4.jar ./Bvito-3.4.4.jar
 
 EXPOSE 8000
 
-CMD ["java", "-jar", "./Bvito-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "./Bvito-3.4.4.jar"]
+CMD ["--spring.profiles.active=prod"]

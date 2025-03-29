@@ -30,3 +30,6 @@ server:
     connection-timeout: 5s
     keep-alive-timeout: 30s
     max-keep-alive-requests: 100
+
+photos:
+  upload-dir: "src/main/resources/static/uploads/adPhotos"

@@ -1,25 +1,29 @@
 services:
-
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+    depends_on:
+      - postgres
 
   postgres:
-    build:
-      context: postgres
-      dockerfile: postgres.Dockerfile
+    image: postgres:17.4-alpine
     container_name: bvito_db
     env_file:
-      - postgres/.env
+      - .env
     ports:
-      - '5432:5432'
+      - "${DB_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    restart: always
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 60s
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
       timeout: 3s
-      retries: 3
-      start_period: 7s
-      start_interval: 1s
+      retries: 5
 
 
 volumes:

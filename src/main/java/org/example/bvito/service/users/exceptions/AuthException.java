@@ -5,7 +5,10 @@ package org.example.bvito.service.users.exceptions;
  * @author Aleksey
  */
 public class AuthException extends RuntimeException {
-    public AuthException(String error) {
-        super(error);
+    public AuthException(String message) {
+        super(message);
+    }
+    public AuthException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

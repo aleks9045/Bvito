@@ -1,6 +1,8 @@
+.git
 src/test
 postgres
 .idea
+*.iml
 target
 
 mvnw.cmd
