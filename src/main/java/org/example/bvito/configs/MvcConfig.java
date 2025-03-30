@@ -1,13 +1,10 @@
-package org.example.bvito;
+package org.example.bvito.configs;
 
 import org.example.bvito.service.photos.utils.PhotoProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Aleksey
