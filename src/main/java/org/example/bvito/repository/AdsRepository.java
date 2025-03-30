@@ -10,6 +10,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
+ *  Works with Advertisement model
+ *  <p>
+ *  Implements JpaRepository, so it has a set of ready-made methods
+ *  @see Ads Advertisement model
  *  @author Aleksey
  */
 public interface AdsRepository extends JpaRepository<Ads, Integer> {

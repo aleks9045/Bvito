@@ -4,8 +4,11 @@ import org.example.bvito.schemas.users.out.SecureUserSchema;
 
 import java.util.Objects;
 
-/**
- * @author Aleksey
+/** Secure advertisement schema
+ * <p>
+ *  Linked with {@link org.example.bvito.schemas.ads.out.AdWithoutUserSchema Secure advertisement schema}
+ *  Linked with {@link org.example.bvito.schemas.ads.out.SecureAdSchema Secure advertisement schema}
+ *  @author Aleksey
  */
 public class SecureAdSchema {
     private AdWithoutUserSchema ad_data;

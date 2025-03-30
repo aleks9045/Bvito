@@ -3,8 +3,10 @@ package org.example.bvito.schemas.ads.out;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * @author Aleksey
+/** Advertisement schema that has no user field and has list of photos
+ * <p>
+ *  Linked with {@link org.example.bvito.schemas.ads.out.AdWithoutUserSchema Advertisement without user schema}
+ *  @author Aleksey
  */
 public class NoUserAdSchema {
     private AdWithoutUserSchema ad_data;

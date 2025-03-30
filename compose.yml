@@ -7,6 +7,8 @@ services:
       - '8000:8000'
     env_file:
       - .env
+    volumes:
+      - bvito_logs:/var/log/bvito
     depends_on:
       - postgres
 
@@ -18,7 +20,7 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -27,4 +29,5 @@ services:
 
 
 volumes:
-  pgdata:
+  pg_data:
+  bvito_logs:

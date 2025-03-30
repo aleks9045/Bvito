@@ -9,15 +9,19 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 
 logging:
+  file:
+    path: /var/log/bvito
+    name: /var/log/bvito/app.log
   level:
-    org.springframework: ERROR
+    root: INFO
+    org.springframework: WARN
 
 server:
   port: 8000

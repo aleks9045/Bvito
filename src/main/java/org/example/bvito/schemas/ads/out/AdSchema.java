@@ -2,8 +2,10 @@ package org.example.bvito.schemas.ads.out;
 
 import java.util.List;
 
-/**
- * @author Aleksey
+/** Advertisement schema that has secure user schema and list of photos
+ * <p>
+ *  Linked with {@link org.example.bvito.schemas.ads.out.SecureAdSchema Secure advertisement schema}
+ *  @author Aleksey
  */
 public class AdSchema {
     private SecureAdSchema ad;

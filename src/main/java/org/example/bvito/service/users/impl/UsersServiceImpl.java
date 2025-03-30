@@ -1,7 +1,6 @@
 package org.example.bvito.service.users.impl;
 
 import org.example.bvito.mappers.ads.AdsMapper;
-import org.example.bvito.mappers.users.UserAdsMapper;
 import org.example.bvito.mappers.users.UsersMapper;
 import org.example.bvito.models.Users;
 import org.example.bvito.repository.AdsRepository;
@@ -26,7 +25,7 @@ import java.util.*;
  * <p>
  * Implementation of {@link UsersService} interface
  * <p>
- * Depends on {@link UsersRepository}, {@link AdsRepository}, {@link AdsMapper}, {@link UserAdsMapper}
+ * Depends on {@link UsersRepository}, {@link AdsRepository}, {@link AdsMapper}
  *
  * @author Aleksey
  */

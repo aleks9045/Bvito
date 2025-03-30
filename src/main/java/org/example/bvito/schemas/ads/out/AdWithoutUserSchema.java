@@ -9,7 +9,6 @@ import java.util.Objects;
  * <p>
  *  Linked with {@link Ads Advertisement model}
  *  <p>
- *  Has no id field, because database creates it automatically<br>
  *  Has no user field for specific display
  *  @author Aleksey
  */

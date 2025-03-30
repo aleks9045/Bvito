@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
+ * Default photo schema
+ * <p>
+ * Uses for upload photo and bind it with advertisement
  * @author Aleksey
  */
 public class PhotoSchema {

@@ -3,6 +3,8 @@ package org.example.bvito.service.photos.exception;
 import org.example.bvito.models.Photos;
 
 /**
+ * Base photo exception
+ *
  * @author Aleksey
  */
 public class PhotoException extends RuntimeException {

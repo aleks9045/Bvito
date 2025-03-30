@@ -9,7 +9,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
- * @author Aleksey
+ *  Works with Photos model
+ *  <p>
+ *  Implements JpaRepository, so it has a set of ready-made methods
+ *  @see Photos Photos model
+ *  @author Aleksey
  */
 public interface PhotosRepository extends JpaRepository<Photos, Integer> {
 

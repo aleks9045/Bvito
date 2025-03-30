@@ -24,7 +24,7 @@ public interface AdsMapper {
 
     /**
      * Maps AdSchema to Ads model
-     * @param AdSchema {@link org.example.bvito.schemas.ads.in.AdSchema Advertisement schema}
+     * @param adSchema {@link AdSchema Advertisement schema}
      * @return {@link Ads Advertisement model}
      */
     @Mapping(target = "a_id", ignore = true)

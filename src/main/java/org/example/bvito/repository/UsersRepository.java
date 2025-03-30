@@ -9,6 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 /**
+ *  Works with Users model
+ *  <p>
+ *  Implements JpaRepository, so it has a set of ready-made methods
+ *  @see Users Users model
  *  @author Aleksey
  */
 public interface UsersRepository extends JpaRepository<Users, Integer> {

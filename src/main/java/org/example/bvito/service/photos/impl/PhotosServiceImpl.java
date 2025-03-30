@@ -1,10 +1,13 @@
 package org.example.bvito.service.photos.impl;
 
 import jakarta.annotation.PostConstruct;
+import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Photos;
+import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.repository.PhotosRepository;
 import org.example.bvito.schemas.photos.in.PhotoSchema;
+import org.example.bvito.service.ads.AdsService;
 import org.example.bvito.service.photos.PhotosService;
 import org.example.bvito.service.photos.exception.PhotoException;
 import org.example.bvito.service.photos.utils.PhotoProperties;
@@ -20,6 +23,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 /**
+ * Class which contains all business logic for {@link Photos} model
+ * <p>
+ * Implementation of {@link PhotosService} interface
+ * <p>
+ * Depends on {@link PhotosRepository}
  * @author Aleksey
  */
 @Service

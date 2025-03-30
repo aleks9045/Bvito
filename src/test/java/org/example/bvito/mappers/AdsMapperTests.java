@@ -4,6 +4,7 @@ package org.example.bvito.mappers;
 import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.schemas.ads.in.AdSchema;
+import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -36,12 +37,6 @@ public class AdsMapperTests {
         assertEquals(adSchema.getPrice(), adsFromSchema.getPrice());
         assertEquals(adSchema.getDescription(), adsFromSchema.getDescription());
 //        assertEquals(ads, adsFromSchema);
-    }
-
-    @Test
-    void toSchemaTest() {
-//        AdSchema adSchemaFromModel = adsMapper.toSchema(ads);
-//        assertEquals(adSchema, adSchemaFromModel);
     }
 
     @Test
