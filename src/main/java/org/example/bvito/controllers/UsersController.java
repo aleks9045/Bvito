@@ -39,7 +39,6 @@ public class UsersController {
         return ResponseEntity.status(200).body(userAdsSchema);
     }
 
-
     @GetMapping("/{u_id}")
     public ResponseEntity<SecureUserSchema> getUser(@PathVariable("u_id") int u_id) {
         SecureUserSchema secureUserSchema = usersService.getUserById(u_id);

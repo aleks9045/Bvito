@@ -29,4 +29,4 @@ server:
     max-keep-alive-requests: 100
 
 photos:
-  upload-dir: "src/main/resources/static/uploads/adPhotos"
+  upload-dir: "classpath:/static/ad_photos/"

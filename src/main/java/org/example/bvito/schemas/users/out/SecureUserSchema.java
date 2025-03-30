@@ -12,12 +12,10 @@ import java.util.Objects;
  *  @author Aleksey
  */
 public class SecureUserSchema {
+
     private Integer u_id;
-
     private String user_name;
-
     private String name;
-
     private String phone_number;
 
     public SecureUserSchema(Integer u_id, String user_name, String name, String phone_number) {

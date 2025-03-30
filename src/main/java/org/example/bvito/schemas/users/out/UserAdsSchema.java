@@ -2,6 +2,7 @@ package org.example.bvito.schemas.users.out;
 
 import org.example.bvito.models.Users;
 import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
+import org.example.bvito.schemas.ads.out.NoUserAdSchema;
 
 import java.util.List;
 
@@ -14,7 +15,12 @@ import java.util.List;
  */
 public class UserAdsSchema {
     private SecureUserSchema user;
-    private List<AdWithoutUserSchema> ads;
+    private List<NoUserAdSchema> ads;
+
+    public UserAdsSchema(SecureUserSchema user, List<NoUserAdSchema> ads) {
+        this.user = user;
+        this.ads = ads;
+    }
 
     public SecureUserSchema getUser() {
         return user;
@@ -24,11 +30,11 @@ public class UserAdsSchema {
         this.user = user;
     }
 
-    public List<AdWithoutUserSchema> getAds() {
+    public List<NoUserAdSchema> getAds() {
         return ads;
     }
 
-    public void setAds(List<AdWithoutUserSchema> ads) {
+    public void setAds(List<NoUserAdSchema> ads) {
         this.ads = ads;
     }
 }

@@ -7,6 +7,7 @@ import org.example.bvito.models.Users;
 import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.repository.UsersRepository;
 import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
+import org.example.bvito.schemas.ads.out.NoUserAdSchema;
 import org.example.bvito.schemas.users.in.UserAuthenticateSchema;
 import org.example.bvito.schemas.users.out.SecureUserSchema;
 import org.example.bvito.schemas.users.out.UserAdsSchema;
@@ -18,8 +19,7 @@ import org.example.bvito.service.users.utils.UserAuthentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * Class which contains all business logic for {@link Users} model
@@ -36,23 +36,30 @@ public class UsersServiceImpl implements UsersService {
     private final AdsRepository adsRepository;
 
     private final UsersMapper usersMapper;
-    private final UserAdsMapper userAdsMapper;
 
 
-    public UsersServiceImpl(UsersRepository usersRepository, AdsRepository adsRepository, UsersMapper usersMapper, UserAdsMapper userAdsMapper) {
+    public UsersServiceImpl(UsersRepository usersRepository, AdsRepository adsRepository, UsersMapper usersMapper) {
         this.usersRepository = usersRepository;
         this.adsRepository = adsRepository;
         this.usersMapper = usersMapper;
-        this.userAdsMapper = userAdsMapper;
     }
 
-
     public UserAdsSchema getUserAds(int u_id) {
+        Map<AdWithoutUserSchema, List<String>> mapAdPhotos = new HashMap<>();
         Users user = usersRepository.findById(u_id).orElseThrow();
-        List<AdWithoutUserSchema> adList = adsRepository.findAllByUser(user);
+        adsRepository.findAllByUser(user).forEach(row -> {
+            AdWithoutUserSchema adWithoutUserSchema = (AdWithoutUserSchema) row[0];
+            String photoUrl = (String) row[1];
+            mapAdPhotos.computeIfAbsent(adWithoutUserSchema, v -> new ArrayList<>()).add(photoUrl);
+        });
+
+        List<NoUserAdSchema> noUserAdSchemaList = mapAdPhotos.entrySet().stream().map(
+                entry -> new NoUserAdSchema(entry.getKey(), entry.getValue())
+        ).toList();
 
         SecureUserSchema secureUserSchema = usersMapper.toSchema(user);
-        return userAdsMapper.toSchema(secureUserSchema, adList);
+
+        return new UserAdsSchema(secureUserSchema, noUserAdSchemaList);
     }
 
     public SecureUserSchema getUserByCredentials(UserAuthenticateSchema userAuthenticateSchema) throws InvalidCredentials {

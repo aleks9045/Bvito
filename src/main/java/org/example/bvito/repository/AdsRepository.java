@@ -15,16 +15,24 @@ import java.util.List;
 public interface AdsRepository extends JpaRepository<Ads, Integer> {
 
     @Query("""
+            SELECT a, p.url
+            FROM Ads a
+            LEFT JOIN Photos p ON p.ads = a""")
+    List<Object[]> findAllWithPhotos();
+
+    @Query("""
             SELECT NEW org.example.bvito.schemas.ads.out.AdWithoutUserSchema(
+                           a.a_id,
                            a.brand,
                            a.model,
                            a.year,
                            a.mileage,
                            a.price,
                            a.description
-                       )
+                       ), p.url
             FROM Ads a
+            LEFT JOIN Photos p ON p.ads = a
             WHERE a.user = :user
             """)
-    List<AdWithoutUserSchema> findAllByUser(@Param("user") Users user);
+    List<Object[]> findAllByUser(@Param("user") Users user);
 }

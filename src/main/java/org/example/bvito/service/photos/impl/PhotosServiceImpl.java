@@ -1,21 +1,18 @@
 package org.example.bvito.service.photos.impl;
 
+import jakarta.annotation.PostConstruct;
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Photos;
 import org.example.bvito.repository.PhotosRepository;
-import org.example.bvito.schemas.photos.PhotoSchema;
+import org.example.bvito.schemas.photos.in.PhotoSchema;
 import org.example.bvito.service.photos.PhotosService;
 import org.example.bvito.service.photos.exception.PhotoException;
 import org.example.bvito.service.photos.utils.PhotoProperties;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,12 +27,15 @@ public class PhotosServiceImpl implements PhotosService {
     private final Path uploadLocation;
     private final PhotosRepository photosRepository;
 
-
     public PhotosServiceImpl(PhotoProperties photoProperties, PhotosRepository photosRepository) {
-        this.uploadLocation = Paths.get(photoProperties.getLocation());
+        this.uploadLocation = Paths.get(photoProperties.getLocation()).toAbsolutePath().normalize();
         this.photosRepository = photosRepository;
     }
 
+    @PostConstruct
+    public void init() throws IOException {
+        Files.createDirectories(uploadLocation);
+    }
 
     public String savePhoto(PhotoSchema photoSchema) {
         MultipartFile file = photoSchema.getFile();
@@ -44,9 +44,9 @@ public class PhotosServiceImpl implements PhotosService {
         }
         Objects.requireNonNull(file.getOriginalFilename());
         Path destinationPath = uploadLocation.resolve(
-                        Paths.get(file.getOriginalFilename()))
-                .normalize().toAbsolutePath();
-        if (!destinationPath.getParent().equals(uploadLocation.toAbsolutePath())) {
+                        Paths.get(file.getOriginalFilename())).normalize();
+
+        if (!destinationPath.getParent().equals(uploadLocation)) {
             // This is a security check
             throw new PhotoException("Cannot store photo outside upload directory.");
         }
@@ -55,32 +55,21 @@ public class PhotosServiceImpl implements PhotosService {
         } catch (IOException e) {
             throw new PhotoException("Failed to save photo");
         }
+
+        String urlForDB = "/ad_photos/" + file.getOriginalFilename();
+        this.saveToDB(photoSchema.getA_id(), urlForDB);
+
+        return urlForDB;
+    }
+
+    public void saveToDB(int a_id, String url){
         Ads ad = new Ads();
-        ad.setA_id(photoSchema.getA_id());
+        ad.setA_id(a_id);
+        ad.setCreatedAt(null);
+
         Photos photo = new Photos();
         photo.setAds(ad);
-        photo.setUrl(destinationPath.toString());
+        photo.setUrl(url);
         photosRepository.save(photo);
-        return destinationPath.toString();
-    }
-
-    public Path load(String filename) {
-        return uploadLocation.resolve(filename);
-    }
-
-    public Resource loadAsResource(String filename) {
-        try {
-            Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new PhotoException(
-                        "Could not find file: " + filename);
-            }
-        } catch (MalformedURLException e) {
-            throw new PhotoException(
-                    "Could not find file: " + filename, e);
-        }
     }
 }

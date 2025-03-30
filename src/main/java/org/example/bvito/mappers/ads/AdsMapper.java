@@ -3,8 +3,10 @@ package org.example.bvito.mappers.ads;
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Users;
 import org.example.bvito.schemas.ads.in.AdSchema;
+import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
+
 
 /**
  *  Mapper for {@link Ads} model
@@ -18,22 +20,16 @@ public interface AdsMapper {
     // For testing
     AdsMapper INSTANCE = Mappers.getMapper(AdsMapper.class);
 
-    /**
-     * Maps Ads model to AdSchema
-     * @param Ads {@link Ads Advertisement model}
-     * @return {@link AdSchema}
-     */
-    @Mapping(target = "u_id", source = "user")
-    AdSchema toSchema(Ads Ads);
+    AdWithoutUserSchema toSchemaWithoutUser(Ads ad);
 
     /**
      * Maps AdSchema to Ads model
-     * @param AdSchema {@link AdSchema Advertisement schema}
+     * @param AdSchema {@link org.example.bvito.schemas.ads.in.AdSchema Advertisement schema}
      * @return {@link Ads Advertisement model}
      */
     @Mapping(target = "a_id", ignore = true)
     @Mapping(target = "user", source = "u_id")
-    Ads toEntity(AdSchema AdSchema);
+    Ads toEntity(AdSchema adSchema);
 
     /**
      * Maps user id to Users model with id set
@@ -59,11 +55,11 @@ public interface AdsMapper {
 
     /**
      * Updates Ads model with Advertisement schema ignoring null values
-     * @param adSchema {@link AdSchema Advertisement schema}
+     * @param adSchema {@link org.example.bvito.schemas.ads.in.AdSchema Advertisement schema}
      * @param ads {@link Ads Advertisement model}
      */
     @Mapping(target = "a_id", ignore = true)
     @Mapping(target = "user", source = "u_id")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(AdSchema adSchema, @MappingTarget Ads ads);
+    void updateEntity(org.example.bvito.schemas.ads.in.AdSchema adSchema, @MappingTarget Ads ads);
 }
