@@ -20,7 +20,7 @@ public class UserSchema {
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")
     @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 64)
-    private String user_name;
+    private String userName;
 
     @Schema(description = "password", maxLength = 64, example = "password")
     @NotNull(groups = UsersValidationGroups.OnCreate.class)
@@ -35,39 +35,39 @@ public class UserSchema {
     @Schema(description = "phone number", maxLength = 16, example = "8(928)384-88-23")
     @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 16)
-    private String phone_number;
+    private String phoneNumber;
 
-    public UserSchema(String user_name, String password, String name, String phone_number) {
-        this.user_name = user_name;
+    public UserSchema(String userName, String password, String name, String phoneNumber) {
+        this.userName = userName;
         this.password = password;
         this.name = name;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserSchema that)) return false;
-        return Objects.equals(getUser_name(), that.getUser_name()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getName(), that.getName()) && Objects.equals(getPhone_number(), that.getPhone_number());
+        return Objects.equals(getUserName(), that.getUserName()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getName(), that.getName()) && Objects.equals(getPhoneNumber(), that.getPhoneNumber());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser_name(), getPassword(), getName(), getPhone_number());
+        return Objects.hash(getUserName(), getPassword(), getName(), getPhoneNumber());
     }
 
     @Override
     public String toString() {
         return "UsersSchema{" +
-                "user_name='" + user_name + '\'' +
+                "user_name='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", phone_number='" + phone_number + '\'' +
+                ", phone_number='" + phoneNumber + '\'' +
                 '}';
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setName(String name) {
@@ -78,12 +78,12 @@ public class UserSchema {
         this.password = password;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
     public String getPassword() {
@@ -94,8 +94,8 @@ public class UserSchema {
         return name;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public static UserSchema newInstance() {

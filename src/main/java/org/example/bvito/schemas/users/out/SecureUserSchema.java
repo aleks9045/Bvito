@@ -13,16 +13,16 @@ import java.util.Objects;
  */
 public class SecureUserSchema {
 
-    private Integer u_id;
-    private String user_name;
+    private Integer uId;
+    private String userName;
     private String name;
-    private String phone_number;
+    private String phoneNumber;
 
-    public SecureUserSchema(Integer u_id, String user_name, String name, String phone_number) {
-        this.u_id = u_id;
-        this.user_name = user_name;
+    public SecureUserSchema(Integer uId, String userName, String name, String phoneNumber) {
+        this.uId = uId;
+        this.userName = userName;
         this.name = name;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
     }
 
     public static SecureUserSchema newInstance() {
@@ -33,38 +33,38 @@ public class SecureUserSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SecureUserSchema that)) return false;
-        return Objects.equals(u_id, that.u_id) && Objects.equals(user_name, that.user_name) && Objects.equals(name, that.name) && Objects.equals(phone_number, that.phone_number);
+        return Objects.equals(uId, that.uId) && Objects.equals(userName, that.userName) && Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(u_id, user_name, name, phone_number);
+        return Objects.hash(uId, userName, name, phoneNumber);
     }
 
     @Override
     public String toString() {
         return "SecureUserSchema{" +
-                "u_id=" + u_id +
-                ", user_name='" + user_name + '\'' +
+                "u_id=" + uId +
+                ", user_name='" + userName + '\'' +
                 ", name='" + name + '\'' +
-                ", phone_number='" + phone_number + '\'' +
+                ", phone_number='" + phoneNumber + '\'' +
                 '}';
     }
 
-    public Integer getU_id() {
-        return u_id;
+    public Integer getuId() {
+        return uId;
     }
 
-    public void setU_id(Integer u_id) {
-        this.u_id = u_id;
+    public void setuId(Integer uId) {
+        this.uId = uId;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {
@@ -75,11 +75,11 @@ public class SecureUserSchema {
         this.name = name;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

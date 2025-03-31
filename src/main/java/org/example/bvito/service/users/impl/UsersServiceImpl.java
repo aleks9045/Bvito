@@ -62,7 +62,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     public SecureUserSchema getUserByCredentials(UserAuthenticateSchema userAuthenticateSchema) throws InvalidCredentials {
-        Users user = usersRepository.findByUserName(userAuthenticateSchema.getUser_name());
+        Users user = usersRepository.findByUserName(userAuthenticateSchema.getUserName());
         if (UserAuthentication.authorize(userAuthenticateSchema, user)) {
             return usersMapper.toSchema(user);
         } else {

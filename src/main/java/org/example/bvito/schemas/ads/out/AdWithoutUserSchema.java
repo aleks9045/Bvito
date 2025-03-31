@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class AdWithoutUserSchema {
 
-    private Integer a_id;
+    private Integer aId;
     private String brand;
     private String model;
     private Short year;
@@ -23,7 +23,7 @@ public class AdWithoutUserSchema {
     private String description;
 
     public AdWithoutUserSchema(Integer a_id, String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
-        this.a_id = a_id;
+        this.aId = a_id;
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -35,7 +35,7 @@ public class AdWithoutUserSchema {
     @Override
     public String toString() {
         return "AdWithoutUserSchema{" +
-                "a_id=" + a_id +
+                "aId=" + aId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
@@ -49,20 +49,20 @@ public class AdWithoutUserSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AdWithoutUserSchema that)) return false;
-        return Objects.equals(a_id, that.a_id) && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(year, that.year) && Objects.equals(mileage, that.mileage) && Objects.equals(price, that.price) && Objects.equals(description, that.description);
+        return Objects.equals(aId, that.aId) && Objects.equals(brand, that.brand) && Objects.equals(model, that.model) && Objects.equals(year, that.year) && Objects.equals(mileage, that.mileage) && Objects.equals(price, that.price) && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(a_id, brand, model, year, mileage, price, description);
+        return Objects.hash(aId, brand, model, year, mileage, price, description);
     }
 
-    public Integer getA_id() {
-        return a_id;
+    public Integer getaId() {
+        return aId;
     }
 
-    public void setA_id(Integer a_id) {
-        this.a_id = a_id;
+    public void setaId(Integer aId) {
+        this.aId = aId;
     }
 
     public String getBrand() {

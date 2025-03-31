@@ -22,8 +22,6 @@ public interface UsersMapper {
      * @param users {@link Users User model}
      * @return {@link SecureUserSchema Secure user schema}
      */
-    @Mapping(source = "userName", target = "user_name")
-    @Mapping(source = "phoneNumber", target = "phone_number")
     SecureUserSchema toSchema(Users users);
 
     /**
@@ -31,9 +29,7 @@ public interface UsersMapper {
      * @param userSchema {@link UserSchema User schema}
      * @return {@link Users User model}
      */
-    @Mapping(target = "u_id", ignore = true)
-    @Mapping(source = "user_name", target = "userName")
-    @Mapping(source = "phone_number", target = "phoneNumber")
+    @Mapping(target = "uId", ignore = true)
     Users toEntity(UserSchema userSchema);
 
     /**
@@ -41,9 +37,7 @@ public interface UsersMapper {
      * @param userSchema {@link UserSchema User schema}
      * @param user {@link Users User model}
      */
-    @Mapping(target = "u_id", ignore = true)
-    @Mapping(source = "user_name", target = "userName")
-    @Mapping(source = "phone_number", target = "phoneNumber")
+    @Mapping(target = "uId", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(UserSchema userSchema, @MappingTarget Users user);
 

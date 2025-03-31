@@ -15,12 +15,12 @@ import java.util.Objects;
  *  Has no id field, because database creates it automatically
  *  @author Aleksey
  */
-public class AdSchema {
+public class AdSchemaIn {
 
     @Schema(description = "user id", example = "1")
     @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Positive
-    private Integer u_id;
+    private Integer uId;
 
     @Schema(description = "brand", maxLength = 32, example = "BMV")
     @NotNull(groups = AdsValidationGroups.OnCreate.class)
@@ -53,9 +53,8 @@ public class AdSchema {
     @Size(max = 256)
     private String description;
 
-
-    public AdSchema(Integer u_id, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
-        this.u_id = u_id;
+    public AdSchemaIn(Integer uId, String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
+        this.uId = uId;
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -65,21 +64,9 @@ public class AdSchema {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AdSchema adSchema)) return false;
-        return Objects.equals(u_id, adSchema.u_id) && Objects.equals(brand, adSchema.brand) && Objects.equals(model, adSchema.model) && Objects.equals(year, adSchema.year) && Objects.equals(mileage, adSchema.mileage) && Objects.equals(price, adSchema.price) && Objects.equals(description, adSchema.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(u_id, brand, model, year, mileage, price, description);
-    }
-
-    @Override
     public String toString() {
-        return "AdsSchema{" +
-                "u_id=" + u_id +
+        return "AdSchemaIn{" +
+                "uId=" + uId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
@@ -89,64 +76,76 @@ public class AdSchema {
                 '}';
     }
 
-    public static AdSchema newInstance() {
-        return new AdSchema(1, "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AdSchemaIn that)) return false;
+        return Objects.equals(getuId(), that.getuId()) && Objects.equals(getBrand(), that.getBrand()) && Objects.equals(getModel(), that.getModel()) && Objects.equals(getYear(), that.getYear()) && Objects.equals(getMileage(), that.getMileage()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getDescription(), that.getDescription());
     }
 
-    public Integer getU_id() {
-        return u_id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getuId(), getBrand(), getModel(), getYear(), getMileage(), getPrice(), getDescription());
     }
 
-    public void setU_id(Integer u_id) {
-        this.u_id = u_id;
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer getuId() {
+        return uId;
     }
 
-    public String getBrand() {
+    public void setuId(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer uId) {
+        this.uId = uId;
+    }
+
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 32) String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 32) String brand) {
         this.brand = brand;
     }
 
-    public String getModel() {
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 64) String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 64) String model) {
         this.model = model;
     }
 
-    public Short getYear() {
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Min(0) @Max(3000) Short getYear() {
         return year;
     }
 
-    public void setYear(Short year) {
+    public void setYear(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Min(0) @Max(3000) Short year) {
         this.year = year;
     }
 
-    public Integer getMileage() {
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Min(0) @Max(10_000_000) Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(Integer mileage) {
+    public void setMileage(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Min(0) @Max(10_000_000) Integer mileage) {
         this.mileage = mileage;
     }
 
-    public BigDecimal getPrice() {
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(@NotNull(groups = AdsValidationGroups.OnCreate.class) BigDecimal price) {
         this.price = price;
     }
 
-    public String getDescription() {
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 256) String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 256) String description) {
         this.description = description;
+    }
+
+    public static AdSchemaIn newInstance() {
+        return new AdSchemaIn(1, "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it");
     }
 
 }

@@ -1,13 +1,10 @@
 package org.example.bvito.service.photos.impl;
 
 import jakarta.annotation.PostConstruct;
-import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Photos;
-import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.repository.PhotosRepository;
 import org.example.bvito.schemas.photos.in.PhotoSchema;
-import org.example.bvito.service.ads.AdsService;
 import org.example.bvito.service.photos.PhotosService;
 import org.example.bvito.service.photos.exception.PhotoException;
 import org.example.bvito.service.photos.utils.PhotoProperties;
@@ -65,18 +62,18 @@ public class PhotosServiceImpl implements PhotosService {
         }
 
         String urlForDB = "/ad_photos/" + file.getOriginalFilename();
-        this.saveToDB(photoSchema.getA_id(), urlForDB);
+        this.saveToDB(photoSchema.getaId(), urlForDB);
 
         return urlForDB;
     }
 
     public void saveToDB(int a_id, String url){
         Ads ad = new Ads();
-        ad.setA_id(a_id);
+        ad.setaId(a_id);
         ad.setCreatedAt(null);
 
         Photos photo = new Photos();
-        photo.setAds(ad);
+        photo.setaAd(ad);
         photo.setUrl(url);
         photosRepository.save(photo);
     }

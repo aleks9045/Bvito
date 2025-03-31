@@ -14,71 +14,66 @@ import java.util.Objects;
 public class Photos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer p_id;
+    private Integer pId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "a_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Ads ads;
+    private Ads ad;
 
     @Column(name = "url", nullable = false)
     private String url;
 
-    public Photos() {
+    public Photos() {}
+
+    public Photos(Integer pId, Ads ad, String url) {
+        this.pId = pId;
+        this.ad = ad;
+        this.url = url;
     }
 
-    public Photos(Integer p_id, Ads ads, String url) {
-        this.p_id = p_id;
-        this.ads = ads;
-        this.url = url;
+    @Override
+    public String toString() {
+        return "Photos{" +
+                "p_id=" + pId +
+                ", aId=" + ad +
+                ", url='" + url + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Photos photos)) return false;
-        return Objects.equals(getP_id(), photos.getP_id()) && Objects.equals(getAds(), photos.getAds()) && Objects.equals(getUrl(), photos.getUrl());
+        return Objects.equals(pId, photos.pId) && Objects.equals(ad, photos.ad) && Objects.equals(url, photos.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getP_id(), getAds(), getUrl());
+        return Objects.hash(pId, ad, url);
     }
 
-    @Override
-    public String toString() {
-        return "Photos{" +
-                "p_id=" + p_id +
-                ", ads=" + ads +
-                ", url='" + url + '\'' +
-                '}';
+    public Integer getPId() {
+        return pId;
     }
 
-    public static Photos newInstance() {
-        return new Photos(1, Ads.newInstance(), "photos/KiaRia.png");
+    public void setPId(Integer p_id) {
+        this.pId = p_id;
     }
 
-    public void setP_id(Integer p_id) {
-        this.p_id = p_id;
+    public Ads getaAd() {
+        return ad;
     }
 
-    public void setAds(Ads ads) {
-        this.ads = ads;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Integer getP_id() {
-        return p_id;
-    }
-
-    public Ads getAds() {
-        return ads;
+    public void setaAd(Ads aId) {
+        this.ad = aId;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

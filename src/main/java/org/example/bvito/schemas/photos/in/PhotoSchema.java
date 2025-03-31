@@ -15,7 +15,7 @@ public class PhotoSchema {
     @Schema(description = "Ad id")
     @Positive
     @NotNull
-    private Integer a_id;
+    private Integer aId;
 
     @Schema(description = "Image file to upload",
             type = "string",
@@ -33,11 +33,11 @@ public class PhotoSchema {
         this.file = file;
     }
 
-    public @NotNull Integer getA_id() {
-        return a_id;
+    public @NotNull Integer getaId() {
+        return aId;
     }
 
-    public void setA_id(@NotNull Integer a_id) {
-        this.a_id = a_id;
+    public void setaId(@NotNull Integer aId) {
+        this.aId = aId;
     }
 }

@@ -4,12 +4,13 @@ import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.mappers.users.UsersMapper;
 import org.example.bvito.models.Ads;
 import org.example.bvito.repository.AdsRepository;
-import org.example.bvito.schemas.ads.out.AdSchema;
+import org.example.bvito.schemas.ads.out.AdSchemaOut;
 import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 import org.example.bvito.schemas.ads.out.SecureAdSchema;
 import org.example.bvito.schemas.users.out.SecureUserSchema;
 import org.example.bvito.service.ads.AdsService;
 import org.springframework.stereotype.Service;
+import org.example.bvito.schemas.ads.in.AdSchemaIn;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
@@ -35,7 +36,7 @@ public class AdsServiceImpl implements AdsService {
         this.usersMapper = usersMapper;
     }
 
-    public List<AdSchema> getAllAds() {
+    public List<AdSchemaOut> getAllAds() {
         Map<SecureAdSchema, List<String>> mapAdPhotos = new HashMap<>();
         adsRepository.findAllWithPhotos().forEach(row -> {
             Ads ad = (Ads) row[0];
@@ -49,7 +50,7 @@ public class AdsServiceImpl implements AdsService {
         });
 
         return mapAdPhotos.entrySet().stream().map(
-                entry -> new AdSchema(entry.getKey(), entry.getValue()))
+                entry -> new AdSchemaOut(entry.getKey(), entry.getValue()))
                 .toList();
     }
 
@@ -57,17 +58,17 @@ public class AdsServiceImpl implements AdsService {
         return adsRepository.findById(a_id).orElseThrow(() -> new NoSuchElementException("Ad not found"));
     }
 
-    public Ads addAd(org.example.bvito.schemas.ads.in.AdSchema adSchema) {
-        Ads ads = adsMapper.toEntity(adSchema);
+    public Ads addAd(AdSchemaIn adSchemaIn) {
+        Ads ads = adsMapper.toEntity(adSchemaIn);
 
         return adsRepository.save(ads);
     }
 
     @Transactional
-    public Ads updateAd(int a_id, org.example.bvito.schemas.ads.in.AdSchema adSchema) {
+    public Ads updateAd(int a_id, AdSchemaIn adSchemaIn) {
         Ads existingAd = adsRepository.findById(a_id).orElseThrow();
 
-        adsMapper.updateEntity(adSchema, existingAd);
+        adsMapper.updateEntity(adSchemaIn, existingAd);
         return existingAd;
     }
 

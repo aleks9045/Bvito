@@ -9,19 +9,19 @@ import java.util.Objects;
  *  @author Aleksey
  */
 public class NoUserAdSchema {
-    private AdWithoutUserSchema ad_data;
-    private List<String> photo_url_list;
+    private AdWithoutUserSchema adData;
+    private List<String> photoUrlList;
 
-    public NoUserAdSchema(AdWithoutUserSchema ad_data, List<String> photo_url_list) {
-        this.ad_data = ad_data;
-        this.photo_url_list = photo_url_list;
+    public NoUserAdSchema(AdWithoutUserSchema adData, List<String> photoUrlList) {
+        this.adData = adData;
+        this.photoUrlList = photoUrlList;
     }
 
     @Override
     public String toString() {
         return "NoUserAdSchema{" +
-                "ad_data=" + ad_data +
-                ", photo_url_list=" + photo_url_list +
+                "ad_data=" + adData +
+                ", photo_url_list=" + photoUrlList +
                 '}';
     }
 
@@ -29,27 +29,27 @@ public class NoUserAdSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof NoUserAdSchema that)) return false;
-        return Objects.equals(ad_data, that.ad_data) && Objects.equals(photo_url_list, that.photo_url_list);
+        return Objects.equals(adData, that.adData) && Objects.equals(photoUrlList, that.photoUrlList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ad_data, photo_url_list);
+        return Objects.hash(adData, photoUrlList);
     }
 
-    public AdWithoutUserSchema getAd_data() {
-        return ad_data;
+    public AdWithoutUserSchema getAdData() {
+        return adData;
     }
 
-    public void setAd_data(AdWithoutUserSchema ad_data) {
-        this.ad_data = ad_data;
+    public void setAdData(AdWithoutUserSchema adData) {
+        this.adData = adData;
     }
 
-    public List<String> getPhoto_url_list() {
-        return photo_url_list;
+    public List<String> getPhotoUrlList() {
+        return photoUrlList;
     }
 
-    public void setPhoto_url_list(List<String> photo_url_list) {
-        this.photo_url_list = photo_url_list;
+    public void setPhotoUrlList(List<String> photoUrlList) {
+        this.photoUrlList = photoUrlList;
     }
 }

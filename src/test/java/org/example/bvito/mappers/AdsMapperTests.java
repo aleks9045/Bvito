@@ -3,11 +3,8 @@ package org.example.bvito.mappers;
 
 import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.models.Ads;
-import org.example.bvito.schemas.ads.in.AdSchema;
-import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
+import org.example.bvito.schemas.ads.in.AdSchemaIn;
 import org.junit.jupiter.api.Test;
-
-import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,24 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class AdsMapperTests {
     private final AdsMapper adsMapper = AdsMapper.INSTANCE;
     private final Ads ads = Ads.newInstance();
-    private final AdSchema adSchema = AdSchema.newInstance();
+    private final AdSchemaIn adSchemaIn = AdSchemaIn.newInstance();
 
     @Test
     void toEntityTest() {
 
-        Ads adsFromSchema = adsMapper.toEntity(adSchema);
+        Ads adsFromSchema = adsMapper.toEntity(adSchemaIn);
         assertNotNull(adsFromSchema);
 
         adsFromSchema.setA_id(1);
 
         assertNotNull(adsFromSchema.getUser());
-        assertEquals(adSchema.getU_id(), adsFromSchema.getUser().getU_id());
-        assertEquals(adSchema.getBrand(), adsFromSchema.getBrand());
-        assertEquals(adSchema.getModel(), adsFromSchema.getModel());
-        assertEquals(adSchema.getYear(), adsFromSchema.getYear());
-        assertEquals(adSchema.getMileage(), adsFromSchema.getMileage());
-        assertEquals(adSchema.getPrice(), adsFromSchema.getPrice());
-        assertEquals(adSchema.getDescription(), adsFromSchema.getDescription());
+        assertEquals(adSchemaIn.getU_id(), adsFromSchema.getUser().getU_id());
+        assertEquals(adSchemaIn.getBrand(), adsFromSchema.getBrand());
+        assertEquals(adSchemaIn.getModel(), adsFromSchema.getModel());
+        assertEquals(adSchemaIn.getYear(), adsFromSchema.getYear());
+        assertEquals(adSchemaIn.getMileage(), adsFromSchema.getMileage());
+        assertEquals(adSchemaIn.getPrice(), adsFromSchema.getPrice());
+        assertEquals(adSchemaIn.getDescription(), adsFromSchema.getDescription());
 //        assertEquals(ads, adsFromSchema);
     }
 
@@ -45,10 +42,10 @@ public class AdsMapperTests {
         adsToUpdate.setBrand("NOT KIA");
         adsToUpdate.setModel("NOT K5");
         adsToUpdate.setYear((short) 1000);
-        adsMapper.updateEntity(adSchema, adsToUpdate);
+        adsMapper.updateEntity(adSchemaIn, adsToUpdate);
 
-        assertEquals(adSchema.getBrand(), adsToUpdate.getBrand());
-        assertEquals(adSchema.getModel(), adsToUpdate.getModel());
-        assertEquals(adSchema.getYear(), adsToUpdate.getYear());
+        assertEquals(adSchemaIn.getBrand(), adsToUpdate.getBrand());
+        assertEquals(adSchemaIn.getModel(), adsToUpdate.getModel());
+        assertEquals(adSchemaIn.getYear(), adsToUpdate.getYear());
     }
 }

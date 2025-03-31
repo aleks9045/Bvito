@@ -1,7 +1,8 @@
 package org.example.bvito.service.ads;
 
 import org.example.bvito.models.Ads;
-import org.example.bvito.schemas.ads.out.AdSchema;
+import org.example.bvito.schemas.ads.in.AdSchemaIn;
+import org.example.bvito.schemas.ads.out.AdSchemaOut;
 import org.example.bvito.service.ads.impl.AdsServiceImpl;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface AdsService {
      * Gets all advertisement entries from database
      * @return list of advertisement models
      */
-    List<AdSchema> getAllAds();
+    List<AdSchemaOut> getAllAds();
 
     /**
      * Gets advertisement entry from database
@@ -29,18 +30,18 @@ public interface AdsService {
 
     /**
      * Adds advertisement entry to database
-     * @param adSchema {@link org.example.bvito.schemas.ads.in.AdSchema}
+     * @param adSchemaIn {@link AdSchemaIn}
      * @return advertisement model
      */
-    Ads addAd(org.example.bvito.schemas.ads.in.AdSchema adSchema);
+    Ads addAd(AdSchemaIn adSchemaIn);
 
     /**
      * Updates advertisement entry in database
      * @param a_id advertisement id
-     * @param adSchema advertisement schema {@link org.example.bvito.schemas.ads.in.AdSchema}
+     * @param adSchemaIn advertisement schema {@link AdSchemaIn}
      * @return advertisement model
      */
-    Ads updateAd(int a_id, org.example.bvito.schemas.ads.in.AdSchema adSchema);
+    Ads updateAd(int a_id, AdSchemaIn adSchemaIn);
 
     /**
      * Deletes advertisement entry from database

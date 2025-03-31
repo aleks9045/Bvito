@@ -20,7 +20,7 @@ public class UserAuthenticateSchema {
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")
     @NotNull(groups = UsersValidationGroups.OnCreate.class)
     @Size(max = 64)
-    private String user_name;
+    private String userName;
 
     @Schema(description = "password", maxLength = 64, example = "password")
     @NotNull(groups = UsersValidationGroups.OnCreate.class)
@@ -28,8 +28,8 @@ public class UserAuthenticateSchema {
     private String password;
 
 
-    public UserAuthenticateSchema(String user_name, String password) {
-        this.user_name = user_name;
+    public UserAuthenticateSchema(String userName, String password) {
+        this.userName = userName;
         this.password = password;
     }
 
@@ -37,18 +37,18 @@ public class UserAuthenticateSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserAuthenticateSchema that)) return false;
-        return Objects.equals(getUser_name(), that.getUser_name()) && Objects.equals(getPassword(), that.getPassword());
+        return Objects.equals(getUserName(), that.getUserName()) && Objects.equals(getPassword(), that.getPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser_name(), getPassword());
+        return Objects.hash(getUserName(), getPassword());
     }
 
     @Override
     public String toString() {
         return "UserAuthenticateSchema{" +
-                "user_name='" + user_name + '\'' +
+                "user_name='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -61,12 +61,12 @@ public class UserAuthenticateSchema {
         this.password = password;
     }
 
-    public @NotNull(groups = UsersValidationGroups.OnCreate.class) @Size(max = 64) String getUser_name() {
-        return user_name;
+    public @NotNull(groups = UsersValidationGroups.OnCreate.class) @Size(max = 64) String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(@NotNull(groups = UsersValidationGroups.OnCreate.class) @Size(max = 64) String user_name) {
-        this.user_name = user_name;
+    public void setUserName(@NotNull(groups = UsersValidationGroups.OnCreate.class) @Size(max = 64) String userName) {
+        this.userName = userName;
     }
 
     public static UserAuthenticateSchema newInstance() {

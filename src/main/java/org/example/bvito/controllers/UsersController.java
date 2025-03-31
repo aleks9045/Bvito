@@ -53,7 +53,7 @@ public class UsersController {
         SecureUserSchema updatedUser = usersService.updateUser(u_id, userSchema);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/users/" + updatedUser.getU_id());
+        headers.add("Location", "/users/" + updatedUser.getuId());
 
         return ResponseEntity.status(200).headers(headers).body(updatedUser);
     }

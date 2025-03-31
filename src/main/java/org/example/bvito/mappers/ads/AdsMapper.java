@@ -2,7 +2,7 @@ package org.example.bvito.mappers.ads;
 
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.in.AdSchema;
+import org.example.bvito.schemas.ads.in.AdSchemaIn;
 import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -24,12 +24,12 @@ public interface AdsMapper {
 
     /**
      * Maps AdSchema to Ads model
-     * @param adSchema {@link AdSchema Advertisement schema}
+     * @param adSchemaIn {@link AdSchemaIn Advertisement schema}
      * @return {@link Ads Advertisement model}
      */
-    @Mapping(target = "a_id", ignore = true)
-    @Mapping(target = "user", source = "u_id")
-    Ads toEntity(AdSchema adSchema);
+    @Mapping(target = "aId", ignore = true)
+    @Mapping(target = "user", source = "uId")
+    Ads toEntity(AdSchemaIn adSchemaIn);
 
     /**
      * Maps user id to Users model with id set
@@ -39,7 +39,7 @@ public interface AdsMapper {
     default Users mapUserIdToUsers(Integer u_id) {
         if (u_id == null) {return null;}
         Users user = new Users();
-        user.setU_id(u_id);
+        user.setuId(u_id);
         return user;
     }
 
@@ -50,16 +50,16 @@ public interface AdsMapper {
      */
     default Integer mapUserIdToUsers(Users users) {
         if (users == null) {return null;}
-        return users.getU_id();
+        return users.getuId();
     }
 
     /**
      * Updates Ads model with Advertisement schema ignoring null values
-     * @param adSchema {@link org.example.bvito.schemas.ads.in.AdSchema Advertisement schema}
+     * @param adSchemaIn {@link AdSchemaIn Advertisement schema}
      * @param ads {@link Ads Advertisement model}
      */
-    @Mapping(target = "a_id", ignore = true)
-    @Mapping(target = "user", source = "u_id")
+    @Mapping(target = "aId", ignore = true)
+    @Mapping(target = "user", source = "uId")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(org.example.bvito.schemas.ads.in.AdSchema adSchema, @MappingTarget Ads ads);
+    void updateEntity(AdSchemaIn adSchemaIn, @MappingTarget Ads ads);
 }

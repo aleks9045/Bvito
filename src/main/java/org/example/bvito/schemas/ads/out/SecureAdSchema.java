@@ -11,11 +11,11 @@ import java.util.Objects;
  *  @author Aleksey
  */
 public class SecureAdSchema {
-    private AdWithoutUserSchema ad_data;
+    private AdWithoutUserSchema adData;
     private SecureUserSchema user;
 
-    public SecureAdSchema(AdWithoutUserSchema ad_data, SecureUserSchema user) {
-        this.ad_data = ad_data;
+    public SecureAdSchema(AdWithoutUserSchema adData, SecureUserSchema user) {
+        this.adData = adData;
         this.user = user;
     }
 
@@ -23,28 +23,28 @@ public class SecureAdSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SecureAdSchema that)) return false;
-        return Objects.equals(getAd_data(), that.getAd_data()) && Objects.equals(getUser(), that.getUser());
+        return Objects.equals(getAdData(), that.getAdData()) && Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAd_data(), getUser());
+        return Objects.hash(getAdData(), getUser());
     }
 
     @Override
     public String toString() {
         return "SecureAdSchema{" +
-                "ad=" + ad_data +
+                "ad=" + adData +
                 ", secureUserSchema=" + user +
                 '}';
     }
 
-    public AdWithoutUserSchema getAd_data() {
-        return ad_data;
+    public AdWithoutUserSchema getAdData() {
+        return adData;
     }
 
-    public void setAd_data(AdWithoutUserSchema ad_data) {
-        this.ad_data = ad_data;
+    public void setAdData(AdWithoutUserSchema adData) {
+        this.adData = adData;
     }
 
     public SecureUserSchema getUser() {

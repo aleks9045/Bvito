@@ -7,13 +7,13 @@ import java.util.List;
  *  Linked with {@link org.example.bvito.schemas.ads.out.SecureAdSchema Secure advertisement schema}
  *  @author Aleksey
  */
-public class AdSchema {
+public class AdSchemaOut {
     private SecureAdSchema ad;
-    private List<String> photo_url_list;
+    private List<String> photoUrlList;
 
-    public AdSchema(SecureAdSchema ad, List<String> photo_url_list) {
+    public AdSchemaOut(SecureAdSchema ad, List<String> photoUrlList) {
         this.ad = ad;
-        this.photo_url_list = photo_url_list;
+        this.photoUrlList = photoUrlList;
     }
 
     public SecureAdSchema getAd() {
@@ -24,11 +24,11 @@ public class AdSchema {
         this.ad = ad;
     }
 
-    public List<String> getPhoto_url_list() {
-        return photo_url_list;
+    public List<String> getPhotoUrlList() {
+        return photoUrlList;
     }
 
-    public void setPhoto_url_list(List<String> photo_url_list) {
-        this.photo_url_list = photo_url_list;
+    public void setPhotoUrlList(List<String> photoUrlList) {
+        this.photoUrlList = photoUrlList;
     }
 }

@@ -3,7 +3,8 @@ package org.example.bvito.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.bvito.models.Ads;
 import org.example.bvito.schemas.ads.AdsValidationGroups;
-import org.example.bvito.schemas.ads.out.AdSchema;
+import org.example.bvito.schemas.ads.in.AdSchemaIn;
+import org.example.bvito.schemas.ads.out.AdSchemaOut;
 import org.example.bvito.service.ads.AdsService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -35,17 +36,17 @@ public class AdsController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<AdSchema>> getAllAds() {
-        List<AdSchema> adsList = adsService.getAllAds();
+    public ResponseEntity<List<AdSchemaOut>> getAllAds() {
+        List<AdSchemaOut> adsList = adsService.getAllAds();
         return ResponseEntity.status(200).body(adsList);
     }
 
     @PostMapping("/")
     public ResponseEntity<Ads> addAd(@Validated(AdsValidationGroups.OnCreate.class)
-                                         @RequestBody org.example.bvito.schemas.ads.in.AdSchema adSchema) {
-        Ads addedAd = adsService.addAd(adSchema);
+                                         @RequestBody AdSchemaIn adSchemaIn) {
+        Ads addedAd = adsService.addAd(adSchemaIn);
         return ResponseEntity.created(
-                        URI.create("/ads/" + addedAd.getA_id()))
+                        URI.create("/ads/" + addedAd.getaId()))
                 .body(addedAd);
     }
 
@@ -60,11 +61,11 @@ public class AdsController {
     @PatchMapping("/{a_id}")
     public ResponseEntity<Ads> patchAd(@PathVariable("a_id") int a_id,
                                        @Validated(AdsValidationGroups.OnUpdate.class)
-                                       @RequestBody org.example.bvito.schemas.ads.in.AdSchema adSchema) {
-        Ads updatedAd = adsService.updateAd(a_id, adSchema);
+                                       @RequestBody AdSchemaIn adSchemaIn) {
+        Ads updatedAd = adsService.updateAd(a_id, adSchemaIn);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/ads/" + updatedAd.getA_id());
+        headers.add("Location", "/ads/" + updatedAd.getaId());
 
         return ResponseEntity.status(200).headers(headers).body(updatedAd);
     }

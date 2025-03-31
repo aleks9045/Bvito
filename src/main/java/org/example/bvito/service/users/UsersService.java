@@ -1,13 +1,10 @@
 package org.example.bvito.service.users;
 
-import org.example.bvito.models.Ads;
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.in.AdSchema;
 import org.example.bvito.schemas.users.in.UserAuthenticateSchema;
 import org.example.bvito.schemas.users.out.SecureUserSchema;
 import org.example.bvito.schemas.users.out.UserAdsSchema;
 import org.example.bvito.schemas.users.in.UserSchema;
-import org.example.bvito.service.ads.impl.AdsServiceImpl;
 import org.example.bvito.service.users.exceptions.InvalidCredentials;
 import org.example.bvito.service.users.impl.UsersServiceImpl;
 
