@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Ads {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer aId;
+    private Integer adId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "u_id", nullable = false)
@@ -53,8 +53,8 @@ public class Ads {
 
     public Ads() {}
 
-    public Ads(Integer aId, Users user, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
-        this.aId = aId;
+    public Ads(Integer adId, Users user, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
+        this.adId = adId;
         this.user = user;
         this.brand = brand;
         this.model = model;
@@ -68,7 +68,7 @@ public class Ads {
     @Override
     public String toString() {
         return "Ads{" +
-                "aId=" + aId +
+                "aId=" + adId +
                 ", uId=" + user +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
@@ -84,24 +84,24 @@ public class Ads {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ads ads)) return false;
-        return Objects.equals(aId, ads.aId) && Objects.equals(user, ads.user) && Objects.equals(brand, ads.brand) && Objects.equals(model, ads.model) && Objects.equals(year, ads.year) && Objects.equals(mileage, ads.mileage) && Objects.equals(price, ads.price) && Objects.equals(description, ads.description) && Objects.equals(createdAt, ads.createdAt);
+        return Objects.equals(adId, ads.adId) && Objects.equals(user, ads.user) && Objects.equals(brand, ads.brand) && Objects.equals(model, ads.model) && Objects.equals(year, ads.year) && Objects.equals(mileage, ads.mileage) && Objects.equals(price, ads.price) && Objects.equals(description, ads.description) && Objects.equals(createdAt, ads.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(aId, user, brand, model, year, mileage, price, description, createdAt);
+        return Objects.hash(adId, user, brand, model, year, mileage, price, description, createdAt);
     }
 
     public static Ads newInstance() {
         return new Ads(1, Users.newInstance(), "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
     }
 
-    public Integer getaId() {
-        return aId;
+    public Integer getAdId() {
+        return adId;
     }
 
-    public void setaId(Integer aId) {
-        this.aId = aId;
+    public void setAdId(Integer aId) {
+        this.adId = aId;
     }
 
     public Users getUser() {

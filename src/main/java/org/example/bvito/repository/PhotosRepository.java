@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface PhotosRepository extends JpaRepository<Photos, Integer> {
 
-
+    void deleteByUrl(String url);
 }

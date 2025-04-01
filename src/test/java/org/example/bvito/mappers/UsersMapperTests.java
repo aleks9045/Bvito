@@ -22,7 +22,7 @@ public class UsersMapperTests {
         UserSchema userSchema = UserSchema.newInstance();
 
         Users usersFromSchema = usersMapper.toEntity(userSchema);
-        usersFromSchema.setU_id(1);
+        usersFromSchema.setUserId(1);
 
         assertEquals(users, usersFromSchema);
     }

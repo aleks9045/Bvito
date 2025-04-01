@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer uId;
+    private Integer userId;
 
     @Column(name = "user_name", nullable = false, unique = true, length = 64)
     private String userName;
@@ -28,8 +28,8 @@ public class Users {
 
     public Users(){}
 
-    public Users(Integer uId, String userName, String password, String name, String phoneNumber) {
-        this.uId = uId;
+    public Users(Integer userId, String userName, String password, String name, String phoneNumber) {
+        this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.name = name;
@@ -42,7 +42,7 @@ public class Users {
     @Override
     public String toString() {
         return "Users{" +
-                "uId=" + uId +
+                "uId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
@@ -54,20 +54,20 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Users users)) return false;
-        return Objects.equals(uId, users.uId) && Objects.equals(userName, users.userName) && Objects.equals(password, users.password) && Objects.equals(name, users.name) && Objects.equals(phoneNumber, users.phoneNumber);
+        return Objects.equals(userId, users.userId) && Objects.equals(userName, users.userName) && Objects.equals(password, users.password) && Objects.equals(name, users.name) && Objects.equals(phoneNumber, users.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, userName, password, name, phoneNumber);
+        return Objects.hash(userId, userName, password, name, phoneNumber);
     }
 
-    public Integer getuId() {
-        return uId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
+    public void setUserId(Integer uId) {
+        this.userId = uId;
     }
 
     public String getUserName() {

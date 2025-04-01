@@ -1,11 +1,12 @@
 package org.example.bvito.schemas.ads.in;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import org.example.bvito.schemas.ads.AdsValidationGroups;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Objects;
 
 /** Default advertisement schema
@@ -15,12 +16,13 @@ import java.util.Objects;
  *  Has no id field, because database creates it automatically
  *  @author Aleksey
  */
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AdSchemaIn {
 
     @Schema(description = "user id", example = "1")
     @NotNull(groups = AdsValidationGroups.OnCreate.class)
     @Positive
-    private Integer uId;
+    private Integer userId;
 
     @Schema(description = "brand", maxLength = 32, example = "BMV")
     @NotNull(groups = AdsValidationGroups.OnCreate.class)
@@ -53,8 +55,8 @@ public class AdSchemaIn {
     @Size(max = 256)
     private String description;
 
-    public AdSchemaIn(Integer uId, String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
-        this.uId = uId;
+    public AdSchemaIn(Integer userId, String brand, String model, Short year, Integer mileage, BigDecimal price, String description) {
+        this.userId = userId;
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -66,7 +68,7 @@ public class AdSchemaIn {
     @Override
     public String toString() {
         return "AdSchemaIn{" +
-                "uId=" + uId +
+                "uId=" + userId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
@@ -80,20 +82,20 @@ public class AdSchemaIn {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AdSchemaIn that)) return false;
-        return Objects.equals(getuId(), that.getuId()) && Objects.equals(getBrand(), that.getBrand()) && Objects.equals(getModel(), that.getModel()) && Objects.equals(getYear(), that.getYear()) && Objects.equals(getMileage(), that.getMileage()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getBrand(), that.getBrand()) && Objects.equals(getModel(), that.getModel()) && Objects.equals(getYear(), that.getYear()) && Objects.equals(getMileage(), that.getMileage()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getuId(), getBrand(), getModel(), getYear(), getMileage(), getPrice(), getDescription());
+        return Objects.hash(getUserId(), getBrand(), getModel(), getYear(), getMileage(), getPrice(), getDescription());
     }
 
-    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer getuId() {
-        return uId;
+    public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer getUserId() {
+        return userId;
     }
 
-    public void setuId(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer uId) {
-        this.uId = uId;
+    public void setUserId(@NotNull(groups = AdsValidationGroups.OnCreate.class) @Positive Integer userId) {
+        this.userId = userId;
     }
 
     public @NotNull(groups = AdsValidationGroups.OnCreate.class) @Size(max = 32) String getBrand() {

@@ -29,7 +29,7 @@ public interface UsersMapper {
      * @param userSchema {@link UserSchema User schema}
      * @return {@link Users User model}
      */
-    @Mapping(target = "uId", ignore = true)
+    @Mapping(target = "userId", ignore = true)
     Users toEntity(UserSchema userSchema);
 
     /**
@@ -37,7 +37,7 @@ public interface UsersMapper {
      * @param userSchema {@link UserSchema User schema}
      * @param user {@link Users User model}
      */
-    @Mapping(target = "uId", ignore = true)
+    @Mapping(target = "userId", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(UserSchema userSchema, @MappingTarget Users user);
 

@@ -9,6 +9,7 @@ import org.example.bvito.service.photos.PhotosService;
 import org.example.bvito.service.photos.exception.PhotoException;
 import org.example.bvito.service.photos.utils.PhotoProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class PhotosServiceImpl implements PhotosService {
     private final PhotosRepository photosRepository;
 
     public PhotosServiceImpl(PhotoProperties photoProperties, PhotosRepository photosRepository) {
-        this.uploadLocation = Paths.get(photoProperties.getLocation()).toAbsolutePath().normalize();
+        this.uploadLocation = Paths.get(photoProperties.getLocation()).normalize();
         this.photosRepository = photosRepository;
     }
 
@@ -42,19 +43,19 @@ public class PhotosServiceImpl implements PhotosService {
         Files.createDirectories(uploadLocation);
     }
 
-    public String savePhoto(PhotoSchema photoSchema) {
-        MultipartFile file = photoSchema.getFile();
+    public String savePhoto(int ad_id, MultipartFile file) {
+
+        if (photosRepository.count() > 4) {
+            throw new PhotoException("There are already 5 photos");
+        }
         if (file.isEmpty()) {
             throw new PhotoException("File is empty");
         }
         Objects.requireNonNull(file.getOriginalFilename());
         Path destinationPath = uploadLocation.resolve(
-                        Paths.get(file.getOriginalFilename())).normalize();
+                        Paths.get(file.getOriginalFilename())).toAbsolutePath().normalize();
+        System.out.println(destinationPath);
 
-        if (!destinationPath.getParent().equals(uploadLocation)) {
-            // This is a security check
-            throw new PhotoException("Cannot store photo outside upload directory.");
-        }
         try (InputStream inputStream = file.getInputStream()) {
             Files.copy(inputStream, destinationPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -62,14 +63,25 @@ public class PhotosServiceImpl implements PhotosService {
         }
 
         String urlForDB = "/ad_photos/" + file.getOriginalFilename();
-        this.saveToDB(photoSchema.getaId(), urlForDB);
+        this.saveToDB(ad_id, urlForDB);
 
         return urlForDB;
     }
+    @Transactional
+    public void deletePhoto(String photoName) {
+        Path destinationPath = uploadLocation.resolve(photoName).normalize();
+        try {
+            Files.delete(destinationPath);
+        } catch (IOException e) {
+            throw new PhotoException("Failed to delete photo");
+        }
+        photosRepository.deleteByUrl("/ad_photos/" + photoName);
+    }
 
-    public void saveToDB(int a_id, String url){
+    public void saveToDB(int a_id, String url) {
+
         Ads ad = new Ads();
-        ad.setaId(a_id);
+        ad.setAdId(a_id);
         ad.setCreatedAt(null);
 
         Photos photo = new Photos();
@@ -77,4 +89,5 @@ public class PhotosServiceImpl implements PhotosService {
         photo.setUrl(url);
         photosRepository.save(photo);
     }
+
 }

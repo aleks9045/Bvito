@@ -23,10 +23,10 @@ public class AdsMapperTests {
         Ads adsFromSchema = adsMapper.toEntity(adSchemaIn);
         assertNotNull(adsFromSchema);
 
-        adsFromSchema.setA_id(1);
+        adsFromSchema.setAdId(1);
 
         assertNotNull(adsFromSchema.getUser());
-        assertEquals(adSchemaIn.getU_id(), adsFromSchema.getUser().getU_id());
+        assertEquals(adSchemaIn.getUserId(), adsFromSchema.getUser().getUserId());
         assertEquals(adSchemaIn.getBrand(), adsFromSchema.getBrand());
         assertEquals(adSchemaIn.getModel(), adsFromSchema.getModel());
         assertEquals(adSchemaIn.getYear(), adsFromSchema.getYear());

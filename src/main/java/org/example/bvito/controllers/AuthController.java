@@ -48,7 +48,7 @@ public class AuthController {
             SecureUserSchema secureUserSchema = usersService.getUserByCredentials(userAuthenticateSchema);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Location", "/users/" + secureUserSchema.getuId());
+            headers.add("Location", "/users/" + secureUserSchema.getUserId());
 
             return ResponseEntity.status(200).headers(headers).body(secureUserSchema);
         } catch (InvalidCredentials e) {

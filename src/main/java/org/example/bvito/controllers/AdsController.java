@@ -46,7 +46,7 @@ public class AdsController {
                                          @RequestBody AdSchemaIn adSchemaIn) {
         Ads addedAd = adsService.addAd(adSchemaIn);
         return ResponseEntity.created(
-                        URI.create("/ads/" + addedAd.getaId()))
+                        URI.create("/ads/" + addedAd.getAdId()))
                 .body(addedAd);
     }
 
@@ -65,7 +65,7 @@ public class AdsController {
         Ads updatedAd = adsService.updateAd(a_id, adSchemaIn);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/ads/" + updatedAd.getaId());
+        headers.add("Location", "/ads/" + updatedAd.getAdId());
 
         return ResponseEntity.status(200).headers(headers).body(updatedAd);
     }

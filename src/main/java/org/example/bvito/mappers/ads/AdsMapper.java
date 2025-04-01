@@ -27,19 +27,19 @@ public interface AdsMapper {
      * @param adSchemaIn {@link AdSchemaIn Advertisement schema}
      * @return {@link Ads Advertisement model}
      */
-    @Mapping(target = "aId", ignore = true)
-    @Mapping(target = "user", source = "uId")
+    @Mapping(target = "adId", ignore = true)
+    @Mapping(target = "user", source = "userId")
     Ads toEntity(AdSchemaIn adSchemaIn);
 
     /**
      * Maps user id to Users model with id set
-     * @param u_id user id
+     * @param userId user id
      * @return {@link Users User model}
      */
-    default Users mapUserIdToUsers(Integer u_id) {
-        if (u_id == null) {return null;}
+    default Users mapUserIdToUsers(Integer userId) {
+        if (userId == null) {return null;}
         Users user = new Users();
-        user.setuId(u_id);
+        user.setUserId(userId);
         return user;
     }
 
@@ -50,7 +50,7 @@ public interface AdsMapper {
      */
     default Integer mapUserIdToUsers(Users users) {
         if (users == null) {return null;}
-        return users.getuId();
+        return users.getUserId();
     }
 
     /**
@@ -58,8 +58,8 @@ public interface AdsMapper {
      * @param adSchemaIn {@link AdSchemaIn Advertisement schema}
      * @param ads {@link Ads Advertisement model}
      */
-    @Mapping(target = "aId", ignore = true)
-    @Mapping(target = "user", source = "uId")
+    @Mapping(target = "adId", ignore = true)
+    @Mapping(target = "user", source = "userId")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntity(AdSchemaIn adSchemaIn, @MappingTarget Ads ads);
 }

@@ -13,13 +13,13 @@ import java.util.Objects;
  */
 public class SecureUserSchema {
 
-    private Integer uId;
+    private Integer userId;
     private String userName;
     private String name;
     private String phoneNumber;
 
-    public SecureUserSchema(Integer uId, String userName, String name, String phoneNumber) {
-        this.uId = uId;
+    public SecureUserSchema(Integer userId, String userName, String name, String phoneNumber) {
+        this.userId = userId;
         this.userName = userName;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -33,30 +33,30 @@ public class SecureUserSchema {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SecureUserSchema that)) return false;
-        return Objects.equals(uId, that.uId) && Objects.equals(userName, that.userName) && Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber);
+        return Objects.equals(userId, that.userId) && Objects.equals(userName, that.userName) && Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, userName, name, phoneNumber);
+        return Objects.hash(userId, userName, name, phoneNumber);
     }
 
     @Override
     public String toString() {
         return "SecureUserSchema{" +
-                "u_id=" + uId +
+                "u_id=" + userId +
                 ", user_name='" + userName + '\'' +
                 ", name='" + name + '\'' +
                 ", phone_number='" + phoneNumber + '\'' +
                 '}';
     }
 
-    public Integer getuId() {
-        return uId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

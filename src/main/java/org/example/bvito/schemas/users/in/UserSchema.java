@@ -1,5 +1,7 @@
 package org.example.bvito.schemas.users.in;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,6 +17,7 @@ import java.util.Objects;
  *  Has no id field, because database creates it automatically
  *  @author Aleksey
  */
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserSchema {
 
     @Schema(description = "username", maxLength = 64, example = "Nikola2007")

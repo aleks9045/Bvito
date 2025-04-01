@@ -2,7 +2,6 @@ package org.example.bvito.repository;
 
 import org.example.bvito.models.Ads;
 import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,7 +25,7 @@ public interface AdsRepository extends JpaRepository<Ads, Integer> {
 
     @Query("""
             SELECT NEW org.example.bvito.schemas.ads.out.AdWithoutUserSchema(
-                           a.aId,
+                           a.adId,
                            a.brand,
                            a.model,
                            a.year,
