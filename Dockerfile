@@ -21,4 +21,4 @@ COPY --from=builder /bvito/target/Bvito-3.4.4.jar ./Bvito-3.4.4.jar
 EXPOSE 8000
 
 ENTRYPOINT ["java", "-jar", "./Bvito-3.4.4.jar"]
-CMD ["--spring.profiles.active=prod"]
+CMD ["--spring.profiles.active=prod", "-Xms256m", "-Xmx888m"]

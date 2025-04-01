@@ -33,24 +33,24 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/{u_id}/ads")
-    public ResponseEntity<UserAdsSchema> getUserAds(@PathVariable("u_id") int u_id) {
-        UserAdsSchema userAdsSchema = usersService.getUserAds(u_id);
+    @GetMapping("/{user_id}/ads")
+    public ResponseEntity<UserAdsSchema> getUserAds(@PathVariable("user_id") int user_id) {
+        UserAdsSchema userAdsSchema = usersService.getUserAds(user_id);
         return ResponseEntity.status(200).body(userAdsSchema);
     }
 
-    @GetMapping("/{u_id}")
-    public ResponseEntity<SecureUserSchema> getUser(@PathVariable("u_id") int u_id) {
-        SecureUserSchema secureUserSchema = usersService.getUserById(u_id);
+    @GetMapping("/{user_id}")
+    public ResponseEntity<SecureUserSchema> getUser(@PathVariable("user_id") int user_id) {
+        SecureUserSchema secureUserSchema = usersService.getUserById(user_id);
 
         return ResponseEntity.status(200).body(secureUserSchema);
     }
 
-    @PatchMapping("/{u_id}")
-    public ResponseEntity<SecureUserSchema> putUser(@PathVariable("u_id") int u_id,
+    @PatchMapping("/{user_id}")
+    public ResponseEntity<SecureUserSchema> putUser(@PathVariable("user_id") int user_id,
                                          @Validated(UsersValidationGroups.OnUpdate.class)
                                          @RequestBody UserSchema userSchema) {
-        SecureUserSchema updatedUser = usersService.updateUser(u_id, userSchema);
+        SecureUserSchema updatedUser = usersService.updateUser(user_id, userSchema);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/users/" + updatedUser.getUserId());
@@ -58,9 +58,9 @@ public class UsersController {
         return ResponseEntity.status(200).headers(headers).body(updatedUser);
     }
 
-    @DeleteMapping("/{u_id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("u_id") int u_id) {
-        usersService.deleteUserById(u_id);
+    @DeleteMapping("/{user_id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("user_id") int user_id) {
+        usersService.deleteUserById(user_id);
         return ResponseEntity.status(200).build();
     }
 }

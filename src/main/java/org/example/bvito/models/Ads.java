@@ -68,8 +68,8 @@ public class Ads {
     @Override
     public String toString() {
         return "Ads{" +
-                "aId=" + adId +
-                ", uId=" + user +
+                "adId=" + adId +
+                ", user=" + user +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
@@ -100,16 +100,16 @@ public class Ads {
         return adId;
     }
 
-    public void setAdId(Integer aId) {
-        this.adId = aId;
+    public void setAdId(Integer adId) {
+        this.adId = adId;
     }
 
     public Users getUser() {
         return user;
     }
 
-    public void setUser(Users uId) {
-        this.user = uId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public String getBrand() {

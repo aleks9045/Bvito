@@ -50,19 +50,18 @@ public class AdsController {
                 .body(addedAd);
     }
 
-    @GetMapping("/{a_id}")
-    public ResponseEntity<Ads> getAd(@PathVariable("a_id") int a_id) {
-        Ads user = adsService.getAdById(a_id);
-
-            return ResponseEntity.ok().body(user);
+    @GetMapping("/{ad_id}")
+    public ResponseEntity<Ads> getAd(@PathVariable("ad_id") int ad_id) {
+        Ads ad = adsService.getAdById(ad_id);
+            return ResponseEntity.ok().body(ad);
 
     }
 
-    @PatchMapping("/{a_id}")
-    public ResponseEntity<Ads> patchAd(@PathVariable("a_id") int a_id,
+    @PatchMapping("/{ad_id}")
+    public ResponseEntity<Ads> patchAd(@PathVariable("ad_id") int ad_id,
                                        @Validated(AdsValidationGroups.OnUpdate.class)
                                        @RequestBody AdSchemaIn adSchemaIn) {
-        Ads updatedAd = adsService.updateAd(a_id, adSchemaIn);
+        Ads updatedAd = adsService.updateAd(ad_id, adSchemaIn);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/ads/" + updatedAd.getAdId());
@@ -70,9 +69,9 @@ public class AdsController {
         return ResponseEntity.status(200).headers(headers).body(updatedAd);
     }
 
-    @DeleteMapping("/{a_id}")
-    public ResponseEntity deleteAd(@PathVariable("a_id") int a_id) {
-        adsService.deleteAdById(a_id);
+    @DeleteMapping("/{ad_id}")
+    public ResponseEntity deleteAd(@PathVariable("ad_id") int ad_id) {
+        adsService.deleteAdById(ad_id);
         return ResponseEntity.ok().build();
     }
 }
