@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,7 +47,7 @@ public class PhotosServiceImpl implements PhotosService {
 
     public String savePhoto(int ad_id, MultipartFile file) {
 
-        if (photosRepository.count() > 4) {
+        if (photosRepository.countByAdId(ad_id) > 4) {
             throw new PhotoException("There are already 5 photos");
         }
         if (file.isEmpty()) {
@@ -67,6 +69,7 @@ public class PhotosServiceImpl implements PhotosService {
 
         return urlForDB;
     }
+
     @Transactional
     public void deletePhoto(String photoName) {
         Path destinationPath = uploadLocation.resolve(photoName).normalize();

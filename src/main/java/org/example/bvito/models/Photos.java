@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Photos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pId;
+    private Integer photoId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "a_id", nullable = false)
@@ -26,8 +26,8 @@ public class Photos {
 
     public Photos() {}
 
-    public Photos(Integer pId, Ads ad, String url) {
-        this.pId = pId;
+    public Photos(Integer photoId, Ads ad, String url) {
+        this.photoId = photoId;
         this.ad = ad;
         this.url = url;
     }
@@ -35,7 +35,7 @@ public class Photos {
     @Override
     public String toString() {
         return "Photos{" +
-                "p_id=" + pId +
+                "p_id=" + photoId +
                 ", aId=" + ad +
                 ", url='" + url + '\'' +
                 '}';
@@ -45,20 +45,28 @@ public class Photos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Photos photos)) return false;
-        return Objects.equals(pId, photos.pId) && Objects.equals(ad, photos.ad) && Objects.equals(url, photos.url);
+        return Objects.equals(photoId, photos.photoId) && Objects.equals(ad, photos.ad) && Objects.equals(url, photos.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pId, ad, url);
+        return Objects.hash(photoId, ad, url);
     }
 
-    public Integer getPId() {
-        return pId;
+    public Integer getPhotoId() {
+        return photoId;
     }
 
-    public void setPId(Integer p_id) {
-        this.pId = p_id;
+    public void setPhotoId(Integer photoId) {
+        this.photoId = photoId;
+    }
+
+    public Ads getAd() {
+        return ad;
+    }
+
+    public void setAd(Ads ad) {
+        this.ad = ad;
     }
 
     public Ads getaAd() {

@@ -1,6 +1,11 @@
 spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 5MB
   application:
     name: Bvito
   datasource:
@@ -11,7 +16,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -35,4 +40,4 @@ server:
     max-keep-alive-requests: 100
 
 photos:
-  upload-dir: "classpath:/static/ad_photos/"
+  upload-dir: "/static/ad_photos/"

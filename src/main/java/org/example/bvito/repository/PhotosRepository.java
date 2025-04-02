@@ -18,4 +18,11 @@ import java.util.List;
 public interface PhotosRepository extends JpaRepository<Photos, Integer> {
 
     void deleteByUrl(String url);
+
+    @Query("""
+            SELECT COUNT(*)
+            FROM Photos p
+            WHERE p.ad.adId = :adId
+            """)
+    int countByAdId(@Param("adId") int adId);
 }
