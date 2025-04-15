@@ -1,12 +1,11 @@
 package org.example.bvito.service.photos;
 
-import org.example.bvito.models.Photos;
-import org.example.bvito.schemas.photos.in.PhotoSchema;
+import org.example.bvito.models.Photo;
 import org.example.bvito.service.photos.impl.PhotosServiceImpl;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- *  A set of methods for business logic with {@link Photos} model
+ *  A set of methods for business logic with {@link Photo} model
  *
  *  @author Aleksey
  *

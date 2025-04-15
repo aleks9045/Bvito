@@ -9,7 +9,8 @@ import java.util.Objects;
  *  @author Aleksey
  */
 @Entity
-public class Users {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
@@ -26,17 +27,17 @@ public class Users {
     @Column(name = "phone_number", nullable = false, unique = true, length = 16)
     private String phoneNumber;
 
-    public Users(){}
+    public User(){}
 
-    public Users(Integer userId, String userName, String password, String name, String phoneNumber) {
+    public User(Integer userId, String userName, String password, String name, String phoneNumber) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
-    public static Users newInstance() {
-        return new Users(1, "Nikola2007", "password", "Nazar'ko Nikolai Vadimovich", "8(928)384-88-23");
+    public static User newInstance() {
+        return new User(1, "Nikola2007", "password", "Nazar'ko Nikolai Vadimovich", "8(928)384-88-23");
     }
 
     @Override
@@ -53,8 +54,8 @@ public class Users {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Users users)) return false;
-        return Objects.equals(userId, users.userId) && Objects.equals(userName, users.userName) && Objects.equals(password, users.password) && Objects.equals(name, users.name) && Objects.equals(phoneNumber, users.phoneNumber);
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(userId, user.userId) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(name, user.name) && Objects.equals(phoneNumber, user.phoneNumber);
     }
 
     @Override

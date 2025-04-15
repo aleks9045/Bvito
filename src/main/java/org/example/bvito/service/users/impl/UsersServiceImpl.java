@@ -2,15 +2,15 @@ package org.example.bvito.service.users.impl;
 
 import org.example.bvito.mappers.ads.AdsMapper;
 import org.example.bvito.mappers.users.UsersMapper;
-import org.example.bvito.models.Users;
+import org.example.bvito.models.User;
 import org.example.bvito.repository.AdsRepository;
 import org.example.bvito.repository.UsersRepository;
-import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
-import org.example.bvito.schemas.ads.out.NoUserAdSchema;
-import org.example.bvito.schemas.users.in.UserAuthenticateSchema;
-import org.example.bvito.schemas.users.out.SecureUserSchema;
-import org.example.bvito.schemas.users.out.UserAdsSchema;
-import org.example.bvito.schemas.users.in.UserSchema;
+import org.example.bvito.schemas.ad.out.AdWithoutUserSchema;
+import org.example.bvito.schemas.ad.out.NoUserAdSchema;
+import org.example.bvito.schemas.user.in.UserAuthenticateSchema;
+import org.example.bvito.schemas.user.out.SecureUserSchema;
+import org.example.bvito.schemas.user.out.UserAdsSchema;
+import org.example.bvito.schemas.user.in.UserSchema;
 import org.example.bvito.service.users.UsersService;
 import org.example.bvito.service.users.exceptions.InvalidCredentials;
 import org.example.bvito.service.users.utils.PasswordManager;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * Class which contains all business logic for {@link Users} model
+ * Class which contains all business logic for {@link User} model
  * <p>
  * Implementation of {@link UsersService} interface
  * <p>
@@ -45,7 +45,7 @@ public class UsersServiceImpl implements UsersService {
 
     public UserAdsSchema getUserAds(int u_id) {
         Map<AdWithoutUserSchema, List<String>> mapAdPhotos = new HashMap<>();
-        Users user = usersRepository.findById(u_id).orElseThrow();
+        User user = usersRepository.findById(u_id).orElseThrow();
         adsRepository.findAllByUser(user).forEach(row -> {
             AdWithoutUserSchema adWithoutUserSchema = (AdWithoutUserSchema) row[0];
             String photoUrl = (String) row[1];
@@ -62,7 +62,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     public SecureUserSchema getUserByCredentials(UserAuthenticateSchema userAuthenticateSchema) throws InvalidCredentials {
-        Users user = usersRepository.findByUserName(userAuthenticateSchema.getUserName());
+        User user = usersRepository.findByUserName(userAuthenticateSchema.getUserName());
         if (UserAuthentication.authorize(userAuthenticateSchema, user)) {
             return usersMapper.toSchema(user);
         } else {
@@ -71,20 +71,20 @@ public class UsersServiceImpl implements UsersService {
     }
 
     public void addUser(UserSchema userSchema) {
-        Users user = usersMapper.toEntity(userSchema);
+        User user = usersMapper.toEntity(userSchema);
         user.setPassword(PasswordManager.hash(user.getPassword()));
         usersRepository.save(user);
     }
 
     public SecureUserSchema getUserById(int u_id) {
-        Users user = usersRepository.findById(u_id).orElseThrow(
+        User user = usersRepository.findById(u_id).orElseThrow(
                 () -> new NoSuchElementException("User not found"));
         return usersMapper.toSchema(user);
     }
 
     @Transactional
     public SecureUserSchema updateUser(int u_id, UserSchema userSchema) {
-        Users existingUser = usersRepository.findById(u_id).orElseThrow();
+        User existingUser = usersRepository.findById(u_id).orElseThrow();
         usersMapper.updateEntity(userSchema, existingUser);
         return usersMapper.toSchema(existingUser);
     }

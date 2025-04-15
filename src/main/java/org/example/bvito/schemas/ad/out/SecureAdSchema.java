@@ -1,13 +1,13 @@
-package org.example.bvito.schemas.ads.out;
+package org.example.bvito.schemas.ad.out;
 
-import org.example.bvito.schemas.users.out.SecureUserSchema;
+import org.example.bvito.schemas.user.out.SecureUserSchema;
 
 import java.util.Objects;
 
 /** Secure advertisement schema
  * <p>
- *  Linked with {@link org.example.bvito.schemas.ads.out.AdWithoutUserSchema Secure advertisement schema}
- *  Linked with {@link org.example.bvito.schemas.ads.out.SecureAdSchema Secure advertisement schema}
+ *  Linked with {@link org.example.bvito.schemas.ad.out.AdWithoutUserSchema Secure advertisement schema}
+ *  Linked with {@link org.example.bvito.schemas.ad.out.SecureAdSchema Secure advertisement schema}
  *  @author Aleksey
  */
 public class SecureAdSchema {

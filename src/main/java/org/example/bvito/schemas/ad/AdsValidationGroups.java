@@ -1,6 +1,6 @@
-package org.example.bvito.schemas.ads;
+package org.example.bvito.schemas.ad;
 
-import org.example.bvito.schemas.ads.in.AdSchemaIn;
+import org.example.bvito.schemas.ad.in.AdSchemaIn;
 
 /**
  * Validation groups for advertisement operations

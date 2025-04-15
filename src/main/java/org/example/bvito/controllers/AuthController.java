@@ -1,14 +1,15 @@
 package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.bvito.models.Users;
-import org.example.bvito.schemas.users.UsersValidationGroups;
-import org.example.bvito.schemas.users.in.UserAuthenticateSchema;
-import org.example.bvito.schemas.users.in.UserSchema;
-import org.example.bvito.schemas.users.out.SecureUserSchema;
+import org.example.bvito.models.User;
+import org.example.bvito.schemas.user.UsersValidationGroups;
+import org.example.bvito.schemas.user.in.UserAuthenticateSchema;
+import org.example.bvito.schemas.user.in.UserSchema;
+import org.example.bvito.schemas.user.out.SecureUserSchema;
 import org.example.bvito.service.users.UsersService;
 import org.example.bvito.service.users.exceptions.InvalidCredentials;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 /**
  *  Rest controller for authentication and authorization logic
  *  <p>
- *  Process HTTP requests to work with {@link Users} model
+ *  Process HTTP requests to work with {@link User} model
  *  Every method returns data in JSON format
  *
  *  @author Aleksey
  *
  * @see UsersService Service layer interface for business logic
- * @see Users User model
+ * @see User User model
  */
 @RestController
 @RequestMapping(path = "api/v1/auth")
@@ -35,10 +36,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Users> addUser(@Validated(UsersValidationGroups.OnCreate.class)
+    public ResponseEntity<User> addUser(@Validated(UsersValidationGroups.OnCreate.class)
                                          @RequestBody UserSchema userSchema) {
         usersService.addUser(userSchema);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
@@ -50,7 +51,7 @@ public class AuthController {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Location", "/users/" + secureUserSchema.getUserId());
 
-            return ResponseEntity.status(200).headers(headers).body(secureUserSchema);
+            return ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(secureUserSchema);
         } catch (InvalidCredentials e) {
             return ResponseEntity.status(401).body(e.getMessage());
         }

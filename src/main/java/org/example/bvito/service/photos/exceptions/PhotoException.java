@@ -1,6 +1,4 @@
-package org.example.bvito.service.photos.exception;
-
-import org.example.bvito.models.Photos;
+package org.example.bvito.service.photos.exceptions;
 
 /**
  * Base photo exception

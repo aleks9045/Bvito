@@ -1,18 +1,18 @@
-package org.example.bvito.schemas.users.in;
+package org.example.bvito.schemas.user.in;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.example.bvito.models.Users;
-import org.example.bvito.schemas.users.UsersValidationGroups;
+import org.example.bvito.models.User;
+import org.example.bvito.schemas.user.UsersValidationGroups;
 
 import java.util.Objects;
 
 /** Authentication user schema
  * <p>
- *  Linked with {@link Users User model}
+ *  Linked with {@link User User model}
  *  <p>
  *  Has only username and password fields
  *  @author Aleksey

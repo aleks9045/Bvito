@@ -1,4 +1,4 @@
-package org.example.bvito.schemas.photos.in;
+package org.example.bvito.schemas.photo.in;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

@@ -1,12 +1,12 @@
-package org.example.bvito.schemas.users.out;
+package org.example.bvito.schemas.user.out;
 
-import org.example.bvito.models.Users;
+import org.example.bvito.models.User;
 
 import java.util.Objects;
 
 /** Secure user schema
  * <p>
- *  Linked with {@link Users User model}
+ *  Linked with {@link User User model}
  *  <p>
  *  Has no password field
  *  @author Aleksey

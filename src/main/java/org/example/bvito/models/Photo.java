@@ -11,7 +11,8 @@ import java.util.Objects;
  *  @author Aleksey
  */
 @Entity
-public class Photos {
+@Table(name = "photo")
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer photoId;
@@ -19,14 +20,14 @@ public class Photos {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "a_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Ads ad;
+    private Ad ad;
 
     @Column(name = "url", nullable = false)
     private String url;
 
-    public Photos() {}
+    public Photo() {}
 
-    public Photos(Integer photoId, Ads ad, String url) {
+    public Photo(Integer photoId, Ad ad, String url) {
         this.photoId = photoId;
         this.ad = ad;
         this.url = url;
@@ -44,8 +45,8 @@ public class Photos {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Photos photos)) return false;
-        return Objects.equals(photoId, photos.photoId) && Objects.equals(ad, photos.ad) && Objects.equals(url, photos.url);
+        if (!(o instanceof Photo photo)) return false;
+        return Objects.equals(photoId, photo.photoId) && Objects.equals(ad, photo.ad) && Objects.equals(url, photo.url);
     }
 
     @Override
@@ -61,19 +62,19 @@ public class Photos {
         this.photoId = photoId;
     }
 
-    public Ads getAd() {
+    public Ad getAd() {
         return ad;
     }
 
-    public void setAd(Ads ad) {
+    public void setAd(Ad ad) {
         this.ad = ad;
     }
 
-    public Ads getaAd() {
+    public Ad getaAd() {
         return ad;
     }
 
-    public void setaAd(Ads aId) {
+    public void setaAd(Ad aId) {
         this.ad = aId;
     }
 

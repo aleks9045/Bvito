@@ -1,15 +1,15 @@
 package org.example.bvito.service.users;
 
-import org.example.bvito.models.Users;
-import org.example.bvito.schemas.users.in.UserAuthenticateSchema;
-import org.example.bvito.schemas.users.out.SecureUserSchema;
-import org.example.bvito.schemas.users.out.UserAdsSchema;
-import org.example.bvito.schemas.users.in.UserSchema;
+import org.example.bvito.models.User;
+import org.example.bvito.schemas.user.in.UserAuthenticateSchema;
+import org.example.bvito.schemas.user.out.SecureUserSchema;
+import org.example.bvito.schemas.user.out.UserAdsSchema;
+import org.example.bvito.schemas.user.in.UserSchema;
 import org.example.bvito.service.users.exceptions.InvalidCredentials;
 import org.example.bvito.service.users.impl.UsersServiceImpl;
 
 /**
- *  A set of methods for business logic with {@link Users} model
+ *  A set of methods for business logic with {@link User} model
  *
  *  @author Aleksey
  *

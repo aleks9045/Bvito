@@ -1,17 +1,18 @@
-package org.example.bvito.schemas.ads.in;
+package org.example.bvito.schemas.ad.in;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
-import org.example.bvito.schemas.ads.AdsValidationGroups;
+import org.example.bvito.models.Ad;
+import org.example.bvito.schemas.ad.AdsValidationGroups;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /** Default advertisement schema
  * <p>
- *  Linked with {@link org.example.bvito.models.Ads Advertisement model}
+ *  Linked with {@link Ad Advertisement model}
  *  <p>
  *  Has no id field, because database creates it automatically
  *  @author Aleksey

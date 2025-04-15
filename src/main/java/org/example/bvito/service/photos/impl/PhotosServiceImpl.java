@@ -1,12 +1,11 @@
 package org.example.bvito.service.photos.impl;
 
 import jakarta.annotation.PostConstruct;
-import org.example.bvito.models.Ads;
-import org.example.bvito.models.Photos;
+import org.example.bvito.models.Ad;
+import org.example.bvito.models.Photo;
 import org.example.bvito.repository.PhotosRepository;
-import org.example.bvito.schemas.photos.in.PhotoSchema;
 import org.example.bvito.service.photos.PhotosService;
-import org.example.bvito.service.photos.exception.PhotoException;
+import org.example.bvito.service.photos.exceptions.PhotoException;
 import org.example.bvito.service.photos.utils.PhotoProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,7 +20,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 /**
- * Class which contains all business logic for {@link Photos} model
+ * Class which contains all business logic for {@link Photo} model
  * <p>
  * Implementation of {@link PhotosService} interface
  * <p>
@@ -83,11 +80,11 @@ public class PhotosServiceImpl implements PhotosService {
 
     public void saveToDB(int a_id, String url) {
 
-        Ads ad = new Ads();
+        Ad ad = new Ad();
         ad.setAdId(a_id);
         ad.setCreatedAt(null);
 
-        Photos photo = new Photos();
+        Photo photo = new Photo();
         photo.setaAd(ad);
         photo.setUrl(url);
         photosRepository.save(photo);

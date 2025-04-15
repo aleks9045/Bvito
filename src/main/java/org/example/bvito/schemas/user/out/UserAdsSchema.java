@@ -1,14 +1,14 @@
-package org.example.bvito.schemas.users.out;
+package org.example.bvito.schemas.user.out;
 
-import org.example.bvito.models.Users;
-import org.example.bvito.schemas.ads.out.AdWithoutUserSchema;
-import org.example.bvito.schemas.ads.out.NoUserAdSchema;
+import org.example.bvito.models.User;
+import org.example.bvito.schemas.ad.out.AdWithoutUserSchema;
+import org.example.bvito.schemas.ad.out.NoUserAdSchema;
 
 import java.util.List;
 
 /** User schema with list of appropriate advertisements
  * <p>
- *  Linked with {@link Users User model}<br>
+ *  Linked with {@link User User model}<br>
  *  Linked with {@link AdWithoutUserSchema Advertisement without user field schema}
  *
  *  @author Aleksey

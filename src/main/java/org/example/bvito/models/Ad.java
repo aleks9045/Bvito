@@ -15,7 +15,8 @@ import java.util.Objects;
  *  @author Aleksey
  */
 @Entity
-public class Ads {
+@Table(name = "ad")
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer adId;
@@ -23,7 +24,7 @@ public class Ads {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "u_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Users user;
+    private User user;
 
     @Column(name = "brand", nullable = false, length = 32)
     private String brand;
@@ -51,9 +52,9 @@ public class Ads {
     @Column(name = "created_at", nullable = false)
     private Instant createdAt = Instant.now();
 
-    public Ads() {}
+    public Ad() {}
 
-    public Ads(Integer adId, Users user, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
+    public Ad(Integer adId, User user, String brand, String model, Short year, Integer mileage, BigDecimal price, String description, Instant createdAt) {
         this.adId = adId;
         this.user = user;
         this.brand = brand;
@@ -83,8 +84,8 @@ public class Ads {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Ads ads)) return false;
-        return Objects.equals(adId, ads.adId) && Objects.equals(user, ads.user) && Objects.equals(brand, ads.brand) && Objects.equals(model, ads.model) && Objects.equals(year, ads.year) && Objects.equals(mileage, ads.mileage) && Objects.equals(price, ads.price) && Objects.equals(description, ads.description) && Objects.equals(createdAt, ads.createdAt);
+        if (!(o instanceof Ad ad)) return false;
+        return Objects.equals(adId, ad.adId) && Objects.equals(user, ad.user) && Objects.equals(brand, ad.brand) && Objects.equals(model, ad.model) && Objects.equals(year, ad.year) && Objects.equals(mileage, ad.mileage) && Objects.equals(price, ad.price) && Objects.equals(description, ad.description) && Objects.equals(createdAt, ad.createdAt);
     }
 
     @Override
@@ -92,8 +93,8 @@ public class Ads {
         return Objects.hash(adId, user, brand, model, year, mileage, price, description, createdAt);
     }
 
-    public static Ads newInstance() {
-        return new Ads(1, Users.newInstance(), "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
+    public static Ad newInstance() {
+        return new Ad(1, User.newInstance(), "KIA", "K5", (short) 2018, 40000, BigDecimal.valueOf(2600000), "Sell because don't like it", Instant.now());
     }
 
     public Integer getAdId() {
@@ -104,11 +105,11 @@ public class Ads {
         this.adId = adId;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

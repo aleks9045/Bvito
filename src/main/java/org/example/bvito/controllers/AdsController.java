@@ -1,12 +1,14 @@
 package org.example.bvito.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.bvito.models.Ads;
-import org.example.bvito.schemas.ads.AdsValidationGroups;
-import org.example.bvito.schemas.ads.in.AdSchemaIn;
-import org.example.bvito.schemas.ads.out.AdSchemaOut;
+import org.example.bvito.models.Ad;
+import org.example.bvito.schemas.ad.AdsValidationGroups;
+import org.example.bvito.schemas.ad.in.AdSchemaIn;
+import org.example.bvito.schemas.ad.out.AdSchemaOut;
 import org.example.bvito.service.ads.AdsService;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,13 @@ import java.util.List;
 /**
  *  Rest controller for ads operations (CRUD)
  *  <p>
- *  Process HTTP requests to work with {@link Ads} model
+ *  Process HTTP requests to work with {@link Ad} model
  *  Every method returns data in JSON format
  *
  *  @author Aleksey
  *
  * @see AdsService Service layer for interface business logic
- * @see Ads Ad model
+ * @see Ad Ad model
  */
 @RestController
 @RequestMapping(path = "/api/v1/ads")
@@ -38,35 +40,35 @@ public class AdsController {
     @GetMapping("/all")
     public ResponseEntity<List<AdSchemaOut>> getAllAds() {
         List<AdSchemaOut> adsList = adsService.getAllAds();
-        return ResponseEntity.status(200).body(adsList);
+        return ResponseEntity.status(HttpStatus.OK).body(adsList);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Ads> addAd(@Validated(AdsValidationGroups.OnCreate.class)
+    public ResponseEntity<Ad> addAd(@Validated(AdsValidationGroups.OnCreate.class)
                                          @RequestBody AdSchemaIn adSchemaIn) {
-        Ads addedAd = adsService.addAd(adSchemaIn);
+        Ad addedAd = adsService.addAd(adSchemaIn);
         return ResponseEntity.created(
                         URI.create("/ads/" + addedAd.getAdId()))
                 .body(addedAd);
     }
 
     @GetMapping("/{ad_id}")
-    public ResponseEntity<Ads> getAd(@PathVariable("ad_id") int ad_id) {
-        Ads ad = adsService.getAdById(ad_id);
+    public ResponseEntity<Ad> getAd(@PathVariable("ad_id") int ad_id) {
+        Ad ad = adsService.getAdById(ad_id);
             return ResponseEntity.ok().body(ad);
 
     }
 
     @PatchMapping("/{ad_id}")
-    public ResponseEntity<Ads> patchAd(@PathVariable("ad_id") int ad_id,
-                                       @Validated(AdsValidationGroups.OnUpdate.class)
+    public ResponseEntity<Ad> patchAd(@PathVariable("ad_id") int ad_id,
+                                      @Validated(AdsValidationGroups.OnUpdate.class)
                                        @RequestBody AdSchemaIn adSchemaIn) {
-        Ads updatedAd = adsService.updateAd(ad_id, adSchemaIn);
+        Ad updatedAd = adsService.updateAd(ad_id, adSchemaIn);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/ads/" + updatedAd.getAdId());
 
-        return ResponseEntity.status(200).headers(headers).body(updatedAd);
+        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(updatedAd);
     }
 
     @DeleteMapping("/{ad_id}")

@@ -1,13 +1,13 @@
-package org.example.bvito.schemas.ads.out;
+package org.example.bvito.schemas.ad.out;
 
-import org.example.bvito.models.Ads;
+import org.example.bvito.models.Ad;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /** Advertisement schema without user field
  * <p>
- *  Linked with {@link Ads Advertisement model}
+ *  Linked with {@link Ad Advertisement model}
  *  <p>
  *  Has no user field for specific display
  *  @author Aleksey
